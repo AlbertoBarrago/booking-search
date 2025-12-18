@@ -97,7 +97,8 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 2px;
+  gap: 4px;
+  padding: 4px;
 }
 
 .rdp-button:hover:not(.rdp-day_disabled) {
@@ -127,6 +128,10 @@
 .rdp-day_range_middle {
   background-color: #dbeafe;
   color: #1e40af;
+}
+
+.rdp-day_range_middle span {
+  color: #ffffff !important;
 }
 
 .rdp-day_today {
