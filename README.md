@@ -6,22 +6,23 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.9-blue.svg)](https://www.typescriptlang.org/)
 [![Tests](https://img.shields.io/badge/tests-63%20passing-success.svg)](./src/components/booking-search/tests/)
 
-Componente React agnostico, altamente performante e accessibile per la ricerca di prenotazioni, ispirato alla search bar di Booking.com.
+A framework-agnostic, high-performance, and accessible React component for booking searches, inspired by the Booking.com search bar.
 
-## 🚀 Caratteristiche
+## 🚀 Features
 
-- ✅ **Totalmente Agnostico**: I dati entrano tramite props, i risultati escono tramite callback
-- ✅ **TypeScript First**: Interfacce complete e type-safe
-- ✅ **Accessibilità**: Piena navigazione da tastiera e attributi ARIA (Radix UI)
-- ✅ **Responsive**: Layout orizzontale su desktop, Dialog su mobile
-- ✅ **Componenti Modulari**:
-  - `LocationCombobox`: Ricerca località con Command pattern (Shadcn)
-  - `DateRangePicker`: Calendario con prezzi inline e disponibilità
-  - `GuestSelector`: Stepper per adulti e bambini
-- ✅ **Styled con Tailwind CSS**: Personalizzabile e moderno
-- ✅ **Built con Bun**: Performance ottimizzate
+* ✅ **Fully Agnostic**: Data flows in via props, results flow out via callbacks
+* ✅ **TypeScript First**: Complete, type-safe interfaces
+* ✅ **Accessibility**: Full keyboard navigation and ARIA attributes (Radix UI)
+* ✅ **Responsive**: Horizontal layout on desktop, Dialog on mobile
+* ✅ **Modular Components**:
 
-## 📦 Installazione
+  * `LocationCombobox`: Location search using the Command pattern (Shadcn)
+  * `DateRangePicker`: Calendar with inline prices and availability
+  * `GuestSelector`: Stepper for adults and children
+* ✅ **Styled with Tailwind CSS**: Modern and easily customizable
+* ✅ **Built with Bun**: Optimized performance
+
+## 📦 Installation
 
 ```bash
 npm install @booking-widget/react
@@ -32,8 +33,8 @@ bun add @booking-widget/react
 ```
 
 ### Peer Dependencies
+This component requires React 19 and Tailwind CSS. Make sure they are installed:
 
-Il componente richiede React 19 e Tailwind CSS. Assicurati di averli installati:
 
 ```bash
 npm install react react-dom tailwindcss
@@ -41,15 +42,15 @@ npm install react react-dom tailwindcss
 
 ## 🎯 Quick Start
 
-### Utilizzo base
+### Basic Usage
 
 ```tsx
 import { BookingSearch } from '@booking-widget/react'
 import type { BookingSearchPayload, Location, AvailabilityDay } from '@booking-widget/react'
 
 const locations: Location[] = [
-  { id: '1', name: 'Roma, Italia', type: 'Città', countryCode: 'IT' },
-  { id: '2', name: 'Firenze, Italia', type: 'Città', countryCode: 'IT' },
+  { id: '1', name: 'Rome, Italy', type: 'City', countryCode: 'IT' },
+  { id: '2', name: 'Florence, Italy', type: 'City', countryCode: 'IT' },
 ]
 
 const availability: AvailabilityDay[] = [
@@ -60,8 +61,8 @@ const availability: AvailabilityDay[] = [
 
 function App() {
   const handleSearch = (payload: BookingSearchPayload) => {
-    console.log('Ricerca:', payload)
-    // Invia i dati al tuo backend o API
+    console.log('Search:', payload)
+    // Send data to your backend or API
   }
 
   return (
@@ -69,7 +70,7 @@ function App() {
       locations={locations}
       availability={availability}
       onSearch={handleSearch}
-      searchButtonText="Cerca disponibilità"
+      searchButtonText="Search availability"
       minNights={1}
       maxAdults={10}
       maxChildren={5}
@@ -82,45 +83,45 @@ function App() {
 
 ### BookingSearchProps
 
-| Prop | Tipo | Default | Descrizione |
-|------|------|---------|-------------|
-| `locations` | `Location[]` | **Required** | Lista delle località disponibili per la ricerca |
-| `availability` | `AvailabilityDay[]` | **Required** | Disponibilità e prezzi per le date |
-| `onSearch` | `(payload: BookingSearchPayload) => void` | **Required** | Callback chiamata quando l'utente avvia una ricerca |
-| `defaultValues` | `Partial<BookingSearchPayload>` | `undefined` | Valori iniziali (opzionale) |
-| `searchButtonText` | `string` | `"Cerca"` | Testo del pulsante di ricerca |
-| `locationPlaceholder` | `string` | `"Dove vuoi andare?"` | Placeholder per il campo località |
-| `minNights` | `number` | `1` | Numero minimo di notti richiesto |
-| `maxAdults` | `number` | `30` | Numero massimo di adulti |
-| `maxChildren` | `number` | `10` | Numero massimo di bambini |
-| `className` | `string` | `undefined` | Classe CSS personalizzata |
+| Prop                  | Type                                      | Default                  | Description                                      |
+| --------------------- | ----------------------------------------- | ------------------------ | ------------------------------------------------ |
+| `locations`           | `Location[]`                              | **Required**             | List of available locations for search           |
+| `availability`        | `AvailabilityDay[]`                       | **Required**             | Availability and prices by date                  |
+| `onSearch`            | `(payload: BookingSearchPayload) => void` | **Required**             | Callback triggered when the user starts a search |
+| `defaultValues`       | `Partial<BookingSearchPayload>`           | `undefined`              | Initial values (optional)                        |
+| `searchButtonText`    | `string`                                  | `"Search"`               | Search button text                               |
+| `locationPlaceholder` | `string`                                  | `"Where are you going?"` | Placeholder for the location field               |
+| `minNights`           | `number`                                  | `1`                      | Minimum number of nights required                |
+| `maxAdults`           | `number`                                  | `30`                     | Maximum number of adults                         |
+| `maxChildren`         | `number`                                  | `10`                     | Maximum number of children                       |
+| `className`           | `string`                                  | `undefined`              | Custom CSS class                                 |
 
-### Interfacce TypeScript
+### TypeScript Interfaces
 
 #### AvailabilityDay
 
-```typescript
+```ts
 interface AvailabilityDay {
-  date: string           // Formato ISO (YYYY-MM-DD)
-  price: number          // Prezzo per questa data
-  isAvailable: boolean   // Disponibilità
+  date: string           // ISO format (YYYY-MM-DD)
+  price: number          // Price for this date
+  isAvailable: boolean   // Availability
 }
 ```
 
 #### Location
 
-```typescript
+```ts
 interface Location {
   id: string
   name: string
-  type?: string          // Tipo di località (città, hotel, etc.)
-  countryCode?: string   // Codice paese ISO
+  type?: string          // Location type (city, hotel, etc.)
+  countryCode?: string   // ISO country code
 }
 ```
 
 #### BookingSearchPayload
 
-```typescript
+```ts
 interface BookingSearchPayload {
   location: Location | null
   checkIn: Date | null
@@ -130,28 +131,28 @@ interface BookingSearchPayload {
 }
 ```
 
-## 🎨 Personalizzazione
+## 🎨 Customization
 
-Il componente utilizza Tailwind CSS per lo styling. Puoi personalizzare i colori e il tema modificando `tailwind.config.js`:
+The component uses Tailwind CSS for styling. You can customize colors and themes via `tailwind.config.js`:
 
 ```js
 export default {
   theme: {
     extend: {
       colors: {
-        // I tuoi colori personalizzati
+        // Your custom colors
       },
     },
   },
 }
 ```
 
-## 🔧 Sotto-componenti Standalone
+## 🔧 Standalone Sub-components
 
-Puoi utilizzare i sotto-componenti individualmente:
+You can also use individual sub-components:
 
 ```tsx
-import { LocationCombobox, DateRangePicker, GuestSelector } from '@booking-widget/react'
+import { LocationCombobox, DateRangePicker, GuestSelector } from '@booking-widget/react';
 
 // LocationCombobox
 <LocationCombobox
@@ -177,46 +178,47 @@ import { LocationCombobox, DateRangePicker, GuestSelector } from '@booking-widge
 />
 ```
 
-## ♿ Accessibilità
+## ♿ Accessibility
 
-Il componente segue le best practice di accessibilità:
+The component follows accessibility best practices:
 
-- **Navigazione da tastiera completa**: Tab, Enter, Escape, frecce direzionali
-- **Attributi ARIA**: Tutti i componenti includono gli attributi ARIA appropriati
-- **Screen reader friendly**: Label e descrizioni per tutti gli elementi interattivi
-- **Focus management**: Focus trap nei popover e dialog
-- **Responsive design**: Ottimizzato per tutti i device
+* **Full keyboard navigation**: Tab, Enter, Escape, arrow keys
+* **ARIA attributes**: All components include appropriate ARIA attributes
+* **Screen reader friendly**: Labels and descriptions for all interactive elements
+* **Focus management**: Focus trapping in popovers and dialogs
+* **Responsive design**: Optimized for all devices
 
-## 🏗️ Struttura del Progetto
+## 🏗️ Project Structure
 
 ```
 BookingWidget/
 ├── src/
 │   ├── components/
 │   │   └── booking-search/
-│   │       ├── index.tsx              # Componente principale
-│   │       ├── location-combobox.tsx  # Combobox località
+│   │       ├── index.tsx              # Main component
+│   │       ├── location-combobox.tsx  # Location combobox
 │   │       ├── date-range-picker.tsx  # Date picker
-│   │       ├── guest-selector.tsx     # Selettore ospiti
-│   │       └── ui/                    # Componenti UI base (Shadcn)
+│   │       ├── guest-selector.tsx     # Guest selector
+│   │       └── ui/                    # Base UI components (Shadcn)
 │   ├── types/
 │   │   └── booking.ts                 # TypeScript interfaces
 │   ├── lib/
 │   │   └── utils.ts                   # Utility functions
 │   ├── styles/
-│   │   └── globals.css                # Stili globali
-│   ├── demo.tsx                       # Demo interattiva
-│   └── index.ts                       # Entry point della libreria
-├── index.html                         # HTML per la demo
-├── index.ts                           # Server Bun
-├── tailwind.config.js                 # Configurazione Tailwind
-├── tsconfig.json                      # Configurazione TypeScript
+│   │   └── globals.css                # Global styles
+│   ├── demo.tsx                       # Interactive demo
+│   └── index.ts                       # Library entry point
+├── index.html                         # Demo HTML
+├── index.ts                           # Bun server
+├── tailwind.config.js                 # Tailwind configuration
+├── tsconfig.json                      # TypeScript configuration
 └── package.json
 ```
 
 ## 🧪 Testing
 
-Il progetto include 63 test con una copertura del 94.73%.
+The project includes 63 tests with 94.73% coverage.
+
 
 ```bash
 # Run tests
@@ -226,27 +228,27 @@ npm test
 npm run test:coverage
 ```
 
-## 📦 Build per produzione
+## 📦 Production Build
 
 ```bash
 bun run build
 ```
 
-Il bundle ottimizzato sarà disponibile nella cartella `dist/`.
+The optimized bundle will be available in the `dist/` folder.
 
-## 🤝 Contribuire
+## 🤝 Contributing
 
-Contributi, issue e feature request sono benvenuti!
+Contributions, issues, and feature requests are welcome!
 
-## 📝 Licenza
+## 📝 License
 
 MIT
 
 ## 🙏 Credits
 
-- Ispirato a [Booking.com](https://www.booking.com)
-- UI components: [Shadcn/UI](https://ui.shadcn.com)
-- Primitives: [Radix UI](https://www.radix-ui.com)
-- Icons: [Lucide React](https://lucide.dev)
-- Date picker: [react-day-picker](https://react-day-picker.js.org)
-- Built with [Bun](https://bun.sh)
+* Inspired by [Booking.com](https://www.booking.com)
+* UI components: [Shadcn/UI](https://ui.shadcn.com)
+* Primitives: [Radix UI](https://www.radix-ui.com)
+* Icons: [Lucide React](https://lucide.dev)
+* Date picker: [react-day-picker](https://react-day-picker.js.org)
+* Built with [Bun](https://bun.sh)

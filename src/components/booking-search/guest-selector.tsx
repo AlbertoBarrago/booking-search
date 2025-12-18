@@ -60,13 +60,14 @@ function GuestStepper({
 }
 
 export function GuestSelector({
-  value,
-  onChange,
-  maxAdults = 30,
-  maxChildren = 10,
-  disabled = false,
-  className,
-}: GuestSelectorProps) {
+                                  value,
+                                  onChange,
+                                  maxAdults = 30,
+                                  maxChildren = 10,
+                                  disabled = false,
+                                  className,
+                                  tabIndex
+                              }: GuestSelectorProps) {
   const [open, setOpen] = React.useState(false)
   const [localValue, setLocalValue] = React.useState(value)
 

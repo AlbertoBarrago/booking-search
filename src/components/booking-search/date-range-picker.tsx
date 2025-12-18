@@ -9,13 +9,14 @@ import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover"
 import "react-day-picker/dist/style.css"
 
 export function DateRangePicker({
-  availability,
-  value,
-  onChange,
-  minNights = 1,
-  disabled = false,
-  className,
-}: DateRangePickerProps) {
+                                    availability,
+                                    value,
+                                    onChange,
+                                    minNights = 1,
+                                    disabled = false,
+                                    className,
+                                    tabIndex
+                                }: DateRangePickerProps) {
   const [open, setOpen] = React.useState(false)
   const [localValue, setLocalValue] = React.useState(value)
 
@@ -44,8 +45,6 @@ export function DateRangePicker({
   }, [availability])
 
   const handleDayClick = (day: Date) => {
-    console.log("🖱️ Day clicked:", day)
-
     if (!localValue.from || (localValue.from && localValue.to)) {
       setLocalValue({ from: day, to: null })
     } else {

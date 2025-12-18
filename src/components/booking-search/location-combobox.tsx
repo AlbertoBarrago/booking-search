@@ -13,13 +13,14 @@ import {
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover"
 
 export function LocationCombobox({
-  locations,
-  value,
-  onChange,
-  placeholder = "Dove vuoi andare?",
-  disabled = false,
-  className,
-}: LocationComboboxProps) {
+                                     locations,
+                                     value,
+                                     onChange,
+                                     placeholder = "Dove vuoi andare?",
+                                     disabled = false,
+                                     className,
+                                     tabIndex
+                                 }: LocationComboboxProps) {
   const [open, setOpen] = React.useState(false)
 
   return (
@@ -53,7 +54,7 @@ export function LocationCombobox({
           <CommandList>
             <CommandEmpty>No location found.</CommandEmpty>
             <CommandGroup>
-              {locations.map((location) => (
+              {locations.map((location: any) => (
                 <CommandItem
                   key={location.id}
                   value={location.name}

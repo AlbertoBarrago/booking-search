@@ -12,10 +12,30 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "./ui/dialog"
+import type {JSX} from "react"
 
 /**
- * Main component for booking search
- * Inspired by Booking.com search bar
+ * A component that provides a booking search interface. Users can select a destination, date range, and number of guests.
+ * It supports both desktop and mobile layouts.
+ *
+ * @param {Object} props - The properties object.
+ * @param {Array} props.availability - The data specifying available dates for booking.
+ * @param {Array} props.locations - The list of available locations for selection.
+ * @param {Function} props.onSearch - Callback function triggered when the search is submitted. Receives selected search criteria as an argument.
+ * @param {Object} [props.defaultValues] - Default values for location, check-in and check-out dates, and guest count.
+ * @param {string} [props.defaultValues.location] - Predefined default location value.
+ * @param {Date} [props.defaultValues.checkIn] - Predefined default check-in date.
+ * @param {Date} [props.defaultValues.checkOut] - Predefined default check-out date.
+ * @param {number} [props.defaultValues.adults=2] - Default number of adults.
+ * @param {number} [props.defaultValues.children=0] - Default number of children.
+ * @param {string} [props.searchButtonText='Cerca'] - Text for the search button.
+ * @param {string} [props.locationPlaceholder='Dove vuoi andare?'] - Placeholder text for the location input field.
+ * @param {number} [props.minNights=1] - Minimum number of nights for the date range picker.
+ * @param {number} [props.maxAdults=30] - Maximum number of adult guests allowed.
+ * @param {number} [props.maxChildren=10] - Maximum number of child guests allowed.
+ * @param {string} [props.className] - Additional CSS class for customizing the component style.
+ *
+ * @return {JSX.Element} A booking search component containing inputs for location, date range, and guest selection, along with a search button.
  */
 export function BookingSearch({
   availability,
@@ -28,8 +48,7 @@ export function BookingSearch({
   maxAdults = 30,
   maxChildren = 10,
   className,
-}: BookingSearchProps) {
-  // Component state
+}: BookingSearchProps): JSX.Element {
   const [location, setLocation] = React.useState<Location | null>(
     defaultValues?.location ?? null
   )
@@ -45,10 +64,8 @@ export function BookingSearch({
     children: defaultValues?.children ?? 0,
   })
 
-  // State for mobile dialog
   const [mobileOpen, setMobileOpen] = React.useState(false)
 
-  // Media query to detect mobile
   const [isMobile, setIsMobile] = React.useState(false)
 
   React.useEffect(() => {
@@ -75,10 +92,8 @@ export function BookingSearch({
 
   const isSearchEnabled = location && dateRange.from && dateRange.to
 
-  // Form content (shared between desktop and mobile)
   const SearchContent = () => (
       <div className="flex flex-col gap-3 md:flex-row md:gap-2 md:items-center">
-        {/* Destination */}
         <div className="flex-1 relative">
           <LocationCombobox
               locations={locations}
@@ -86,12 +101,11 @@ export function BookingSearch({
               onChange={setLocation}
               placeholder={locationPlaceholder}
               className="w-full border-0 md:rounded-l-lg md:rounded-r-none focus-visible:ring-0"
+              tabIndex={1}
           />
-          {/* Vertical Divider */}
           <div className="hidden md:block absolute -right-1 top-1/4 h-1/2 w-px bg-slate-200" />
         </div>
 
-        {/* Check-in & Check-out */}
         <div className="flex-1 relative">
           <DateRangePicker
               availability={availability}
@@ -99,12 +113,11 @@ export function BookingSearch({
               onChange={setDateRange}
               minNights={minNights}
               className="w-full border-0 md:rounded-none focus-visible:ring-0"
+              tabIndex={2}
           />
-          {/* Vertical Divider */}
           <div className="hidden md:block absolute -right-1 top-1/4 h-1/2 w-px bg-slate-200" />
         </div>
 
-        {/* Ospiti (Guests) */}
         <div className="flex-1 relative">
           <GuestSelector
               value={guests}
@@ -112,16 +125,17 @@ export function BookingSearch({
               maxAdults={maxAdults}
               maxChildren={maxChildren}
               className="w-full border-0 md:rounded-none focus-visible:ring-0"
+              tabIndex={3}
           />
         </div>
 
-        {/* Search Button */}
         <div className="md:pl-2">
           <button
               type="button"
               onClick={handleSearch}
               disabled={!isSearchEnabled}
               aria-label={searchButtonText}
+              tabIndex={4}
               className={cn(
                   "flex h-12 w-full items-center justify-center gap-2 rounded-lg bg-blue-600 px-6 text-sm font-bold text-white transition-all hover:bg-blue-700 disabled:bg-slate-300 md:w-auto",
               )}
@@ -133,7 +147,6 @@ export function BookingSearch({
       </div>
   )
 
-  // Desktop render (always visible)
   if (!isMobile) {
     return (
       <div
@@ -149,13 +162,13 @@ export function BookingSearch({
     )
   }
 
-  // Mobile render (in a Dialog)
   return (
     <>
       <Dialog open={mobileOpen} onOpenChange={setMobileOpen}>
         <DialogTrigger asChild>
           <button
             type="button"
+            tabIndex={0}
             className={cn(
               "flex h-14 w-full items-center gap-3 rounded-lg border border-slate-300 bg-white px-4 shadow-md",
               className
@@ -187,7 +200,6 @@ export function BookingSearch({
   )
 }
 
-// Export sub-components for standalone use
 export { LocationCombobox } from "./location-combobox"
 export { DateRangePicker } from "./date-range-picker"
 export { GuestSelector } from "./guest-selector"
