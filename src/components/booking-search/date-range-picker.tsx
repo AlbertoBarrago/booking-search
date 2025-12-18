@@ -26,8 +26,14 @@ export function DateRangePicker({
   className,
 }: DateRangePickerProps) {
   const [open, setOpen] = React.useState(false)
+  const [localValue, setLocalValue] = React.useState(value)
 
-  // Create a map for fast access to availability data
+  React.useEffect(() => {
+    if (open) {
+      setLocalValue(value)
+    }
+  }, [open, value])
+
   const availabilityMap = React.useMemo(() => {
     const map = new Map<string, AvailabilityDay>()
     availability.forEach((day) => {
@@ -36,7 +42,6 @@ export function DateRangePicker({
     return map
   }, [availability])
 
-  // Determine which days are disabled
   const disabledDays = React.useMemo(() => {
     const disabled: Date[] = []
     availability.forEach((day) => {
@@ -50,26 +55,27 @@ export function DateRangePicker({
   const handleDayClick = (day: Date) => {
     console.log("🖱️ Day clicked:", day)
 
-    if (!value.from || (value.from && value.to)) {
-      // First click or reset
-      console.log("📍 Setting start date")
-      onChange({ from: day, to: null })
+    if (!localValue.from || (localValue.from && localValue.to)) {
+      setLocalValue({ from: day, to: null })
     } else {
-      // Second click
-      if (day < value.from) {
-        // Click on earlier date, reverse
-        console.log("🔄 Reversing dates")
-        onChange({ from: day, to: value.from })
-        setOpen(false) // Close after complete selection
+      if (day < localValue.from) {
+        setLocalValue({ from: day, to: localValue.from })
       } else {
-        console.log("✅ Setting end date")
-        onChange({ from: value.from, to: day })
-        setOpen(false) // Close after complete selection
+        setLocalValue({ from: localValue.from, to: day })
       }
     }
   }
 
-  // Custom day render to show prices
+  const handleConfirm = () => {
+    onChange(localValue)
+    setOpen(false)
+  }
+
+  const handleCancel = () => {
+    setLocalValue(value)
+    setOpen(false)
+  }
+
   const renderDay = (day: Date) => {
     const dateStr = format(day, "yyyy-MM-dd")
     const dayData = availabilityMap.get(dateStr)
@@ -78,7 +84,7 @@ export function DateRangePicker({
       <div className="flex flex-col items-center justify-center">
         <span>{format(day, "d")}</span>
         {dayData && dayData.isAvailable && (
-          <span className="text-[10px] font-bold text-blue-600 leading-none">
+          <span className="text-[10px] font-semibold text-slate-600 leading-none mt-0.5">
             €{dayData.price}
           </span>
         )}
@@ -96,6 +102,17 @@ export function DateRangePicker({
     return "Seleziona date"
   }
 
+  const formatLocalDateRange = () => {
+    if (localValue.from && localValue.to) {
+      const nights = differenceInDays(localValue.to, localValue.from)
+      return `${nights} ${nights === 1 ? 'notte' : 'notti'}`
+    }
+    if (localValue.from) {
+      return "Seleziona check-out"
+    }
+    return "Seleziona le date"
+  }
+
   const getNights = () => {
     if (value.from && value.to) {
       return differenceInDays(value.to, value.from)
@@ -103,17 +120,16 @@ export function DateRangePicker({
     return 0
   }
 
-  // Modifiers for styling
   const modifiers: Record<string, Date | Date[]> = {
     disabled: disabledDays,
   }
 
-  if (value.from) {
-    modifiers.start = value.from
+  if (localValue.from) {
+    modifiers.start = localValue.from
   }
 
-  if (value.to) {
-    modifiers.end = value.to
+  if (localValue.to) {
+    modifiers.end = localValue.to
   }
 
   const modifiersClassNames = {
@@ -153,14 +169,21 @@ export function DateRangePicker({
           </div>
         </button>
       </PopoverTrigger>
-      <PopoverContent className="w-auto p-0 shadow-2xl" align="start" sideOffset={8}>
+      <PopoverContent
+        className="w-auto p-0 shadow-2xl"
+        align="start"
+        sideOffset={8}
+        onInteractOutside={(e) => {
+          e.preventDefault()
+        }}
+      >
         <div className="p-4">
           <DayPicker
             mode="range"
-            defaultMonth={value.from || new Date()}
+            defaultMonth={localValue.from || new Date()}
             selected={{
-              from: value.from || undefined,
-              to: value.to || undefined,
+              from: localValue.from || undefined,
+              to: localValue.to || undefined,
             }}
             onDayClick={handleDayClick}
             disabled={disabledDays}
@@ -173,6 +196,32 @@ export function DateRangePicker({
               formatDay: renderDay,
             }}
           />
+
+          <div className="border-t border-slate-200 p-4 space-y-3">
+            <div className="text-center">
+              <p className="text-sm font-medium text-slate-700">
+                {formatLocalDateRange()}
+              </p>
+            </div>
+
+            <div className="flex gap-2">
+              <button
+                type="button"
+                onClick={handleCancel}
+                className="flex-1 rounded-lg border-2 border-slate-300 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 transition-colors hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2"
+              >
+                Annulla
+              </button>
+              <button
+                type="button"
+                onClick={handleConfirm}
+                disabled={!localValue.from || !localValue.to}
+                className="flex-1 rounded-lg bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:bg-slate-300 disabled:hover:bg-slate-300"
+              >
+                Conferma
+              </button>
+            </div>
+          </div>
         </div>
       </PopoverContent>
     </Popover>

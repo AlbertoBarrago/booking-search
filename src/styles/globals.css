@@ -102,6 +102,7 @@
 
 .rdp-button:hover:not(.rdp-day_disabled) {
   background-color: #f1f5f9;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .rdp-day_range_start,
@@ -109,11 +110,18 @@
   background-color: #3b82f6 !important;
   color: white !important;
   font-weight: 600;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+}
+
+.rdp-day_range_start span,
+.rdp-day_range_end span {
+  color: white !important;
 }
 
 .rdp-day_range_start:hover,
 .rdp-day_range_end:hover {
   background-color: #2563eb !important;
+  box-shadow: 0 6px 16px rgba(37, 99, 235, 0.5);
 }
 
 .rdp-day_range_middle {

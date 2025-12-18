@@ -121,6 +121,7 @@ export function BookingSearch({
               type="button"
               onClick={handleSearch}
               disabled={!isSearchEnabled}
+              aria-label={searchButtonText}
               className={cn(
                   "flex h-12 w-full items-center justify-center gap-2 rounded-lg bg-blue-600 px-6 text-sm font-bold text-white transition-all hover:bg-blue-700 disabled:bg-slate-300 md:w-auto",
               )}
