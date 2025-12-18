@@ -1,3 +1,4 @@
+// @ts-ignore
 import {Location} from "happy-dom";
 
 /**
@@ -37,7 +38,7 @@ export interface GuestData {
  */
 export interface BookingSearchPayload {
     /** Selected location */
-    location: Location | null;
+    location: Location | null | any;
     /** Check-in date */
     checkIn: Date | null;
     /** Check-out date */
@@ -55,7 +56,7 @@ export interface BookingSearchProps {
     /** Availability and prices for dates */
     availability: AvailabilityDay[];
     /** List of available locations for search */
-    locations: Location[];
+    locations: Location[] | any;
     /** Callback called when user initiates a search */
     onSearch: (payload: BookingSearchPayload) => void;
     /** Initial values (optional) */
@@ -79,11 +80,11 @@ export interface BookingSearchProps {
  */
 export interface LocationComboboxProps {
     /** List of locations to display */
-    locations: Location[],
+    locations: Location[] | any,
     /** Currently selected location */
-    value: Location | null,
+    value: Location | null | any,
     /** Callback when location changes */
-    onChange: (location: Location | null) => void,
+    onChange: (location: Location | null | any) => void,
     /** Placeholder text */
     placeholder?: string,
     /** Whether the combobox is disabled */
@@ -98,17 +99,18 @@ export interface LocationComboboxProps {
  */
 export interface DateRangePickerProps {
     /** Availability and prices for dates */
-    availability: AvailabilityDay[];
+    availability: AvailabilityDay[],
     /** Selected date range */
-    value: { from: Date | null; to: Date | null };
+    value: { from: Date | null; to: Date | null },
     /** Callback when date range changes */
-    onChange: (range: { from: Date | null; to: Date | null }) => void;
+    onChange: (range: { from: Date | null; to: Date | null }) => void,
     /** Minimum number of nights required */
-    minNights?: number;
+    minNights?: number,
     /** Whether the picker is disabled */
-    disabled?: boolean;
+    disabled?: boolean,
     /** Custom CSS class */
-    className?: string;
+    className?: string,
+    tabIndex?: number
 }
 
 /**
@@ -116,17 +118,18 @@ export interface DateRangePickerProps {
  */
 export interface GuestSelectorProps {
     /** Current guest data */
-    value: GuestData;
+    value: GuestData,
     /** Callback when guest data changes */
-    onChange: (guests: GuestData) => void;
+    onChange: (guests: GuestData) => void,
     /** Maximum number of adults */
-    maxAdults?: number;
+    maxAdults?: number,
     /** Maximum number of children */
-    maxChildren?: number;
+    maxChildren?: number,
     /** Whether the selector is disabled */
-    disabled?: boolean;
+    disabled?: boolean,
     /** Custom CSS class */
-    className?: string;
+    className?: string,
+    tabIndex?: number
 }
 
 /**

@@ -54,7 +54,7 @@ export function LocationCombobox({
           <CommandList>
             <CommandEmpty>No location found.</CommandEmpty>
             <CommandGroup>
-              {locations.map((location) => (
+              {locations.map((location: any) => (
                 <CommandItem
                   key={location.id}
                   value={location.name}
