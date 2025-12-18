@@ -1,27 +1,8 @@
 import * as React from "react"
 import { Users, Minus, Plus } from "lucide-react"
 import { cn } from "../../lib/utils"
-import type { GuestData } from "../../types/booking"
+import type { GuestSelectorProps, GuestStepperProps } from "../../types/booking"
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover"
-
-interface GuestSelectorProps {
-  value: GuestData
-  onChange: (guests: GuestData) => void
-  maxAdults?: number
-  maxChildren?: number
-  disabled?: boolean
-  className?: string
-}
-
-interface GuestStepperProps {
-  label: string
-  description?: string
-  value: number
-  onIncrement: () => void
-  onDecrement: () => void
-  min?: number
-  max?: number
-}
 
 function GuestStepper({
   label,
@@ -87,15 +68,27 @@ export function GuestSelector({
   className,
 }: GuestSelectorProps) {
   const [open, setOpen] = React.useState(false)
+  const [localValue, setLocalValue] = React.useState(value)
+
+  React.useEffect(() => {
+    if (open) {
+      setLocalValue(value)
+    }
+  }, [open, value])
 
   const handleAdultsChange = (delta: number) => {
-    const newValue = Math.max(1, Math.min(maxAdults, value.adults + delta))
-    onChange({ ...value, adults: newValue })
+    const newValue = Math.max(1, Math.min(maxAdults, localValue.adults + delta))
+    setLocalValue({ ...localValue, adults: newValue })
   }
 
   const handleChildrenChange = (delta: number) => {
-    const newValue = Math.max(0, Math.min(maxChildren, value.children + delta))
-    onChange({ ...value, children: newValue })
+    const newValue = Math.max(0, Math.min(maxChildren, localValue.children + delta))
+    setLocalValue({ ...localValue, children: newValue })
+  }
+
+  const handleConfirm = () => {
+    onChange(localValue)
+    setOpen(false)
   }
 
   const formatGuestText = () => {
@@ -119,7 +112,12 @@ export function GuestSelector({
   }
 
   return (
-    <Popover open={open} onOpenChange={setOpen}>
+    <Popover
+      open={open}
+      onOpenChange={(newOpen) => {
+        setOpen(newOpen)
+      }}
+    >
       <PopoverTrigger asChild>
         <button
           type="button"
@@ -137,12 +135,18 @@ export function GuestSelector({
           </div>
         </button>
       </PopoverTrigger>
-      <PopoverContent className="w-[320px]" align="start">
+      <PopoverContent
+        className="w-[320px]"
+        align="start"
+        onInteractOutside={(e) => {
+          e.preventDefault()
+        }}
+      >
         <div className="space-y-1">
           <GuestStepper
             label="Adulti"
             description="Età 18+"
-            value={value.adults}
+            value={localValue.adults}
             onIncrement={() => handleAdultsChange(1)}
             onDecrement={() => handleAdultsChange(-1)}
             min={1}
@@ -152,7 +156,7 @@ export function GuestSelector({
           <GuestStepper
             label="Bambini"
             description="Età 0-17"
-            value={value.children}
+            value={localValue.children}
             onIncrement={() => handleChildrenChange(1)}
             onDecrement={() => handleChildrenChange(-1)}
             min={0}
@@ -162,7 +166,7 @@ export function GuestSelector({
           <div className="pt-3">
             <button
               type="button"
-              onClick={() => setOpen(false)}
+              onClick={handleConfirm}
               className="w-full rounded-lg bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
             >
               Conferma

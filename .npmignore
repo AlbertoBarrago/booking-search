@@ -1,0 +1,28 @@
+# Development files
+index.ts
+index.html
+demo.tsx
+test-setup.ts
+bunfig.toml
+CLAUDE.md
+
+# Tests
+src/components/booking-search/tests/
+*.test.tsx
+*.test.ts
+
+# Build artifacts
+coverage/
+node_modules/
+.env
+.env.*
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Git
+.git/
+.gitignore

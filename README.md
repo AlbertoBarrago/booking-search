@@ -1,5 +1,11 @@
 # BookingSearch Widget
 
+[![npm version](https://img.shields.io/npm/v/@booking-widget/react.svg)](https://www.npmjs.com/package/@booking-widget/react)
+[![Coverage](https://img.shields.io/badge/coverage-94.73%25-brightgreen.svg)](./coverage)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.9-blue.svg)](https://www.typescriptlang.org/)
+[![Tests](https://img.shields.io/badge/tests-63%20passing-success.svg)](./src/components/booking-search/tests/)
+
 Componente React agnostico, altamente performante e accessibile per la ricerca di prenotazioni, ispirato alla search bar di Booking.com.
 
 ## 🚀 Caratteristiche
@@ -18,18 +24,22 @@ Componente React agnostico, altamente performante e accessibile per la ricerca d
 ## 📦 Installazione
 
 ```bash
-bun install
+npm install @booking-widget/react
+# or
+yarn add @booking-widget/react
+# or
+bun add @booking-widget/react
+```
+
+### Peer Dependencies
+
+Il componente richiede React 19 e Tailwind CSS. Assicurati di averli installati:
+
+```bash
+npm install react react-dom tailwindcss
 ```
 
 ## 🎯 Quick Start
-
-### Avviare la demo
-
-```bash
-bun run dev
-```
-
-Apri [http://localhost:3000](http://localhost:3000) per vedere la demo interattiva.
 
 ### Utilizzo base
 
@@ -206,8 +216,14 @@ BookingWidget/
 
 ## 🧪 Testing
 
+Il progetto include 63 test con una copertura del 94.73%.
+
 ```bash
-bun test
+# Run tests
+npm test
+
+# Run tests with coverage
+npm run test:coverage
 ```
 
 ## 📦 Build per produzione
