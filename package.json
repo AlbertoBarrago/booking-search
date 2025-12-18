@@ -2,14 +2,23 @@
   "name": "@booking-widget/react",
   "version": "1.0.0",
   "description": "Componente React agnostico per ricerca booking, ispirato a Booking.com",
-  "main": "./src/index.ts",
-  "module": "./src/index.ts",
-  "types": "./src/index.ts",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "type": "module",
   "files": [
+    "dist",
     "src",
     "README.md"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/booking-widget.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/booking-widget/issues"
+  },
+  "homepage": "https://github.com/yourusername/booking-widget#readme",
   "keywords": [
     "react",
     "booking",
@@ -17,10 +26,17 @@
     "widget",
     "typescript",
     "shadcn",
-    "tailwind"
+    "tailwind",
+    "react-component",
+    "booking-search",
+    "date-picker",
+    "location-search"
   ],
   "author": "",
   "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "scripts": {
     "dev": "bun run build:css && bun --watch index.ts",
     "dev:css": "bun run build:css && bunx concurrently \"bun --watch index.ts\" \"bun run watch:css\"",
@@ -28,36 +44,37 @@
     "build:css": "tailwindcss -i ./src/styles/globals.css -o ./src/styles/output.css --minify",
     "watch:css": "tailwindcss -i ./src/styles/globals.css -o ./src/styles/output.css --watch",
     "type-check": "tsc --noEmit",
-    "test": "bun run test"
+    "test": "bun test src/components/booking-search/tests/",
+    "test:coverage": "bun test --coverage src/components/booking-search/tests/",
+    "prepublishOnly": "bun run type-check && bun run test && bun run build"
   },
   "devDependencies": {
     "@happy-dom/global-registrator": "^20.0.11",
+    "@testing-library/react": "^16.3.1",
     "@types/bun": "latest",
     "@types/react": "19.2.7",
     "@types/react-dom": "19.2.3",
     "autoprefixer": "^10.4.23",
     "happy-dom": "^20.0.11",
     "postcss": "^8.5.6",
-    "tailwindcss": "3.4.17"
+    "tailwindcss": "3.4.17",
+    "typescript": "^5.9.3"
   },
   "peerDependencies": {
-    "typescript": "^5.9.3"
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "tailwindcss": ">=3.0.0"
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.1.15",
     "@radix-ui/react-popover": "^1.1.15",
     "@radix-ui/react-slot": "^1.2.4",
-    "@testing-library/react": "^16.3.1",
-    "baseline-browser-mapping": "^2.9.10",
-    "caniuse-lite": "^1.0.30001760",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "^1.1.1",
     "date-fns": "^4.1.0",
     "lucide-react": "^0.562.0",
-    "react": "19.2.3",
     "react-day-picker": "8.10.1",
-    "react-dom": "19.2.3",
     "tailwind-merge": "^3.4.0"
   }
 }

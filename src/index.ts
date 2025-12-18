@@ -20,6 +20,10 @@ export type {
   GuestData,
   BookingSearchPayload,
   BookingSearchProps,
+  LocationComboboxProps,
+  DateRangePickerProps,
+  GuestSelectorProps,
+  GuestStepperProps,
 } from "./types/booking"
 
 // Esporta utility

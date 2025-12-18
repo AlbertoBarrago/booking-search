@@ -1,7 +1,7 @@
 import * as React from "react"
 import { Check, MapPin } from "lucide-react"
 import { cn } from "../../lib/utils"
-import type { Location } from "../../types/booking"
+import type { LocationComboboxProps } from "../../types/booking"
 import {
   Command,
   CommandEmpty,
@@ -11,15 +11,6 @@ import {
   CommandList,
 } from "./ui/command"
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover"
-
-interface LocationComboboxProps {
-  locations: Location[]
-  value: Location | null
-  onChange: (location: Location | null) => void
-  placeholder?: string
-  disabled?: boolean
-  className?: string
-}
 
 export function LocationCombobox({
   locations,

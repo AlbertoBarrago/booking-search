@@ -4,18 +4,9 @@ import { format, parseISO, differenceInDays } from "date-fns"
 import { it } from "date-fns/locale"
 import { Calendar } from "lucide-react"
 import { cn } from "../../lib/utils"
-import type { AvailabilityDay } from "../../types/booking"
+import type { DateRangePickerProps, AvailabilityDay } from "../../types/booking"
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover"
 import "react-day-picker/dist/style.css"
-
-interface DateRangePickerProps {
-  availability: AvailabilityDay[]
-  value: { from: Date | null; to: Date | null }
-  onChange: (range: { from: Date | null; to: Date | null }) => void
-  minNights?: number
-  disabled?: boolean
-  className?: string
-}
 
 export function DateRangePicker({
   availability,

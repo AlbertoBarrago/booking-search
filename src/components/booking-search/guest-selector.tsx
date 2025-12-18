@@ -1,27 +1,8 @@
 import * as React from "react"
 import { Users, Minus, Plus } from "lucide-react"
 import { cn } from "../../lib/utils"
-import type { GuestData } from "../../types/booking"
+import type { GuestSelectorProps, GuestStepperProps } from "../../types/booking"
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover"
-
-interface GuestSelectorProps {
-  value: GuestData
-  onChange: (guests: GuestData) => void
-  maxAdults?: number
-  maxChildren?: number
-  disabled?: boolean
-  className?: string
-}
-
-interface GuestStepperProps {
-  label: string
-  description?: string
-  value: number
-  onIncrement: () => void
-  onDecrement: () => void
-  min?: number
-  max?: number
-}
 
 function GuestStepper({
   label,
