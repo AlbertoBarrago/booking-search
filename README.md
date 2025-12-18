@@ -151,7 +151,7 @@ export default {
 Puoi utilizzare i sotto-componenti individualmente:
 
 ```tsx
-import { LocationCombobox, DateRangePicker, GuestSelector } from '@booking-widget/react'
+import { LocationCombobox, DateRangePicker, GuestSelector } from '@booking-widget/react';
 
 // LocationCombobox
 <LocationCombobox
