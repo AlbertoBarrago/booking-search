@@ -101,6 +101,7 @@ export function BookingSearch({
               onChange={setLocation}
               placeholder={locationPlaceholder}
               className="w-full border-0 md:rounded-l-lg md:rounded-r-none focus-visible:ring-0"
+              tabIndex={1}
           />
           <div className="hidden md:block absolute -right-1 top-1/4 h-1/2 w-px bg-slate-200" />
         </div>
@@ -112,6 +113,7 @@ export function BookingSearch({
               onChange={setDateRange}
               minNights={minNights}
               className="w-full border-0 md:rounded-none focus-visible:ring-0"
+              tabIndex={2}
           />
           <div className="hidden md:block absolute -right-1 top-1/4 h-1/2 w-px bg-slate-200" />
         </div>
@@ -123,6 +125,7 @@ export function BookingSearch({
               maxAdults={maxAdults}
               maxChildren={maxChildren}
               className="w-full border-0 md:rounded-none focus-visible:ring-0"
+              tabIndex={3}
           />
         </div>
 
@@ -132,6 +135,7 @@ export function BookingSearch({
               onClick={handleSearch}
               disabled={!isSearchEnabled}
               aria-label={searchButtonText}
+              tabIndex={4}
               className={cn(
                   "flex h-12 w-full items-center justify-center gap-2 rounded-lg bg-blue-600 px-6 text-sm font-bold text-white transition-all hover:bg-blue-700 disabled:bg-slate-300 md:w-auto",
               )}

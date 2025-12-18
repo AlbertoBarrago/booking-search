@@ -13,13 +13,14 @@ import {
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover"
 
 export function LocationCombobox({
-  locations,
-  value,
-  onChange,
-  placeholder = "Dove vuoi andare?",
-  disabled = false,
-  className,
-}: LocationComboboxProps) {
+                                     locations,
+                                     value,
+                                     onChange,
+                                     placeholder = "Dove vuoi andare?",
+                                     disabled = false,
+                                     className,
+                                     tabIndex
+                                 }: LocationComboboxProps) {
   const [open, setOpen] = React.useState(false)
 
   return (
