@@ -45,8 +45,6 @@ export function DateRangePicker({
   }, [availability])
 
   const handleDayClick = (day: Date) => {
-    console.log("🖱️ Day clicked:", day)
-
     if (!localValue.from || (localValue.from && localValue.to)) {
       setLocalValue({ from: day, to: null })
     } else {
