@@ -32,7 +32,7 @@
     "date-picker",
     "location-search"
   ],
-  "author": "",
+  "author": "Alberto Barrago",
   "license": "MIT",
   "engines": {
     "node": ">=18.0.0"
