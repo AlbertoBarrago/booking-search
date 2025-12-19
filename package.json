@@ -1,6 +1,6 @@
 {
   "name": "@balby/booking-search",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "publishConfig": {
     "access": "public"
   },
@@ -43,7 +43,7 @@
   "scripts": {
     "dev": "bun run build:css && bun --watch index.ts",
     "dev:css": "bun run build:css && bunx concurrently \"bun --watch index.ts\" \"bun run watch:css\"",
-    "build": "bun run build:css && bun build src/index.ts --outdir=dist --target=browser --format=esm",
+    "build": "bun run build:css && bun build src/index.ts --outdir=dist --target=browser --format=esm --external react --external react-dom --external react/jsx-runtime",
     "build:css": "tailwindcss -i ./src/styles/globals.css -o ./src/styles/output.css --minify",
     "build:types": "tsc -p tsconfig.build.json",
     "watch:css": "tailwindcss -i ./src/styles/globals.css -o ./src/styles/output.css --watch",
@@ -70,7 +70,6 @@
     "tailwindcss": ">=3.0.0"
   },
   "dependencies": {
-    "@balby/booking-search": "^1.0.1",
     "@radix-ui/react-dialog": "^1.1.15",
     "@radix-ui/react-popover": "^1.1.15",
     "@radix-ui/react-slot": "^1.2.4",

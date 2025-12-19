@@ -1,6 +1,6 @@
 import React from "react"
 import { createRoot } from "react-dom/client"
-import { BookingSearch } from "./components/booking-search"
+import { BookingSearch } from "./components/booking-search";
 import type { BookingSearchPayload, SearchLocation, AvailabilityDay } from "./types/booking"
 import "./styles/output.css"
 
