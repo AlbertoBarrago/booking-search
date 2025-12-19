@@ -23,11 +23,6 @@ import type {JSX} from "react"
  * @param {Array} props.locations - The list of available locations for selection.
  * @param {Function} props.onSearch - Callback function triggered when the search is submitted. Receives selected search criteria as an argument.
  * @param {Object} [props.defaultValues] - Default values for location, check-in and check-out dates, and guest count.
- * @param {string} [props.defaultValues.location] - Predefined default location value.
- * @param {Date} [props.defaultValues.checkIn] - Predefined default check-in date.
- * @param {Date} [props.defaultValues.checkOut] - Predefined default check-out date.
- * @param {number} [props.defaultValues.adults=2] - Default number of adults.
- * @param {number} [props.defaultValues.children=0] - Default number of children.
  * @param {string} [props.searchButtonText='Cerca'] - Text for the search button.
  * @param {string} [props.locationPlaceholder='Dove vuoi andare?'] - Placeholder text for the location input field.
  * @param {number} [props.minNights=1] - Minimum number of nights for the date range picker.

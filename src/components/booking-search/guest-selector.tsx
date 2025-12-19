@@ -132,7 +132,7 @@ export function GuestSelector({
         >
           <Users className="h-5 w-5 text-slate-500 flex-shrink-0" aria-hidden="true" />
           <div className="flex flex-col min-w-0 flex-1">
-            <span className="text-xs font-medium text-slate-500">Ospiti</span>
+            <span className="text-xs font-medium text-slate-500">Guests</span>
             <span className="font-medium text-slate-900 truncate">{formatGuestText()}</span>
           </div>
         </button>

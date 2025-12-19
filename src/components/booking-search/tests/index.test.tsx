@@ -47,7 +47,7 @@ describe("BookingSearch", () => {
 
     expect(screen.getByText("Destination")).toBeDefined()
     expect(screen.getByText("Check-in - Check-out")).toBeDefined()
-    expect(screen.getByText("Ospiti")).toBeDefined()
+    expect(screen.getByText("Guests")).toBeDefined()
     expect(screen.getByRole("button", { name: /search/i })).toBeDefined()
   })
 
@@ -319,7 +319,7 @@ describe("BookingSearch", () => {
     )
 
     // The component should render without errors
-    expect(screen.getByText("Ospiti")).toBeDefined()
+    expect(screen.getByText("Guests")).toBeDefined()
   })
 
   test("passes maxChildren prop to GuestSelector", () => {
@@ -333,7 +333,7 @@ describe("BookingSearch", () => {
     )
 
     // The component should render without errors
-    expect(screen.getByText("Ospiti")).toBeDefined()
+    expect(screen.getByText("Guests")).toBeDefined()
   })
 
   test("updates state when location is changed", async () => {
