@@ -40,12 +40,34 @@ This component requires React 19 and Tailwind CSS. Make sure they are installed:
 npm install react react-dom tailwindcss
 ```
 
+### Importing Styles
+
+This package requires you to import the CSS file. There are several ways to do this:
+
+**Option 1: Using the styles export (Recommended)**
+```tsx
+import '@balby/booking-search/styles'
+```
+
+**Option 2: Direct CSS import**
+```tsx
+import '@balby/booking-search/dist/index.css'
+```
+
+**Option 3: In your global CSS file**
+```css
+@import '@balby/booking-search/styles';
+```
+
 ## 🎯 Quick Start
 
 ### Basic Usage
 
+**Important:** You must import the CSS file for the component to display correctly.
+
 ```tsx
 import { BookingSearch } from '@balby/booking-search'
+import '@balby/booking-search/styles'
 import type { BookingSearchPayload, Location, AvailabilityDay } from '@balby/booking-search'
 
 const locations: Location[] = [
@@ -152,7 +174,8 @@ export default {
 You can also use individual sub-components:
 
 ```tsx
-import { LocationCombobox, DateRangePicker, GuestSelector } from '@booking-search/react';
+import { LocationCombobox, DateRangePicker, GuestSelector } from '@balby/booking-search'
+import '@balby/booking-search/styles'
 
 // LocationCombobox
 <LocationCombobox
