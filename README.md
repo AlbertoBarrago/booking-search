@@ -42,22 +42,24 @@ npm install react react-dom tailwindcss
 
 ### Importing Styles
 
-This package requires you to import the CSS file. There are several ways to do this:
+This package requires you to import the CSS file. Choose one of the following methods:
 
-**Option 1: Using the styles export (Recommended)**
+**Option 1: Import in your JavaScript/TypeScript (Recommended)**
 ```tsx
 import '@balby/booking-search/styles'
 ```
 
-**Option 2: Direct CSS import**
+**Option 2: Import in your global CSS file**
+```css
+@import '@balby/booking-search/styles';
+```
+
+**Option 3: Direct path import**
 ```tsx
 import '@balby/booking-search/dist/index.css'
 ```
 
-**Option 3: In your global CSS file**
-```css
-@import '@balby/booking-search/styles';
-```
+> **Note:** All import methods are supported. Choose the one that best fits your build setup.
 
 ## 🎯 Quick Start
 
@@ -68,9 +70,9 @@ import '@balby/booking-search/dist/index.css'
 ```tsx
 import { BookingSearch } from '@balby/booking-search'
 import '@balby/booking-search/styles'
-import type { BookingSearchPayload, Location, AvailabilityDay } from '@balby/booking-search'
+import type { BookingSearchPayload, SearchLocation, AvailabilityDay } from '@balby/booking-search'
 
-const locations: Location[] = [
+const locations: SearchLocation[] = [
   { id: '1', name: 'Rome, Italy', type: 'City', countryCode: 'IT' },
   { id: '2', name: 'Florence, Italy', type: 'City', countryCode: 'IT' },
 ]

@@ -1,10 +1,10 @@
 {
   "name": "@balby/booking-search",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "publishConfig": {
     "access": "public"
   },
-  "description": "Componente React agnostico per ricerca booking, ispirato a Booking.com",
+  "description": "Framework-agnostic React component for booking search, inspired by Booking.com",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -16,7 +16,12 @@
       "import": "./dist/index.js",
       "default": "./dist/index.js"
     },
-    "./styles": "./dist/index.css"
+    "./styles": {
+      "import": "./dist/index.css",
+      "require": "./dist/index.css",
+      "default": "./dist/index.css"
+    },
+    "./dist/index.css": "./dist/index.css"
   },
   "files": [
     "dist",
