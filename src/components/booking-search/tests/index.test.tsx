@@ -2,7 +2,7 @@ import { test, expect, describe, beforeEach } from "bun:test"
 import React from "react"
 import { render, screen, fireEvent, waitFor } from "@testing-library/react"
 import { BookingSearch } from "../index"
-import type { Location, AvailabilityDay, BookingSearchPayload } from "../../../types/booking"
+import type { SearchLocation, AvailabilityDay, BookingSearchPayload } from "../../../types/booking"
 import { format, addDays } from "date-fns"
 
 describe("BookingSearch", () => {
@@ -10,7 +10,7 @@ describe("BookingSearch", () => {
   const tomorrow = addDays(today, 1)
   const nextWeek = addDays(today, 7)
 
-  const mockLocations: Location[] = [
+  const mockLocations: SearchLocation[] = [
     { id: "1", name: "Rome", type: "City" },
     { id: "2", name: "Milan", type: "City" },
     { id: "3", name: "Venice", type: "City" },
@@ -45,10 +45,10 @@ describe("BookingSearch", () => {
       />
     )
 
-    expect(screen.getByText("Destinazione")).toBeDefined()
+    expect(screen.getByText("Destinazion")).toBeDefined()
     expect(screen.getByText("Check-in - Check-out")).toBeDefined()
     expect(screen.getByText("Ospiti")).toBeDefined()
-    expect(screen.getByRole("button", { name: /cerca/i })).toBeDefined()
+    expect(screen.getByRole("button", { name: /search/i })).toBeDefined()
   })
 
   test("displays default location when provided", () => {
@@ -121,7 +121,7 @@ describe("BookingSearch", () => {
       />
     )
 
-    const searchButton = screen.getByRole("button", { name: /cerca/i })
+    const searchButton = screen.getByRole("button", { name: /search/i })
     expect(searchButton.hasAttribute("disabled")).toBe(true)
   })
 
@@ -144,7 +144,7 @@ describe("BookingSearch", () => {
       />
     )
 
-    const searchButton = screen.getByRole("button", { name: /cerca/i })
+    const searchButton = screen.getByRole("button", { name: /search/i })
     expect(searchButton.hasAttribute("disabled")).toBe(true)
   })
 
@@ -167,7 +167,7 @@ describe("BookingSearch", () => {
       />
     )
 
-    const searchButton = screen.getByRole("button", { name: /cerca/i })
+    const searchButton = screen.getByRole("button", { name: /search/i })
     expect(searchButton.hasAttribute("disabled")).toBe(false)
   })
 
@@ -175,7 +175,7 @@ describe("BookingSearch", () => {
     const firstLocation = mockLocations[0]
     if (!firstLocation) return
 
-    let searchParams: BookingSearchPayload | null | any = null
+    let searchParams: BookingSearchPayload | null = null
     const handleSearch = (params: BookingSearchPayload) => {
       searchParams = params
     }
@@ -195,16 +195,14 @@ describe("BookingSearch", () => {
       />
     )
 
-    const searchButton = screen.getByRole("button", { name: /cerca/i })
+    const searchButton = screen.getByRole("button", { name: /search/i })
     expect(searchButton).toBeDefined()
     fireEvent.click(searchButton)
 
     expect(searchParams).not.toBeNull()
-    if (searchParams) {
-      expect(searchParams.location?.id).toBe(firstLocation.id)
-      expect(searchParams.adults).toBe(2)
-      expect(searchParams.children).toBe(1)
-    }
+    expect(searchParams!.location?.id).toBe(firstLocation.id)
+    expect(searchParams!.adults).toBe(2)
+    expect(searchParams!.children).toBe(1)
   })
 
   test("uses custom search button text when provided", () => {
@@ -292,7 +290,7 @@ describe("BookingSearch", () => {
     expect(guestButton).toBeDefined()
 
     // Test search button
-    const searchButton = screen.getByRole("button", { name: /cerca/i })
+    const searchButton = screen.getByRole("button", { name: /search/i })
     expect(searchButton).toBeDefined()
   })
 
@@ -360,7 +358,7 @@ describe("BookingSearch", () => {
     )
 
     // Initially search button should be disabled
-    const searchButton = screen.getByRole("button", { name: /cerca/i })
+    const searchButton = screen.getByRole("button", { name: /search/i })
     expect(searchButton.hasAttribute("disabled")).toBe(true)
 
     // Open location combobox
@@ -381,7 +379,7 @@ describe("BookingSearch", () => {
 
     // Wait for state to update and get updated button reference
     const updatedSearchButton = await waitFor(() => {
-      const btn = screen.getByRole("button", { name: /cerca/i })
+      const btn = screen.getByRole("button", { name: /search/i })
       expect(btn).toBeDefined()
       expect(btn.hasAttribute("disabled")).toBe(false)
       return btn

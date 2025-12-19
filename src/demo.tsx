@@ -1,11 +1,11 @@
 import React from "react"
 import { createRoot } from "react-dom/client"
 import { BookingSearch } from "./components/booking-search"
-import type { BookingSearchPayload, Location, AvailabilityDay } from "./types/booking"
+import type { BookingSearchPayload, SearchLocation, AvailabilityDay } from "./types/booking"
 import "./styles/output.css"
 
 // Sample location data
-const sampleLocations: Location[] = [
+const sampleLocations: SearchLocation[] = [
   {
     id: "1",
     name: "Roma, Italia",

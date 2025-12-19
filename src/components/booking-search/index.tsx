@@ -1,7 +1,7 @@
 import * as React from "react"
 import { Search } from "lucide-react"
 import { cn } from "../../lib/utils"
-import type { BookingSearchProps, Location, GuestData } from "../../types/booking"
+import type { BookingSearchProps, SearchLocation, GuestData } from "../../types/booking"
 import { LocationCombobox } from "./location-combobox"
 import { DateRangePicker } from "./date-range-picker"
 import { GuestSelector } from "./guest-selector"
@@ -49,7 +49,7 @@ export function BookingSearch({
   maxChildren = 10,
   className,
 }: BookingSearchProps): JSX.Element {
-  const [location, setLocation] = React.useState<Location | null>(
+  const [location, setLocation] = React.useState<SearchLocation | null>(
     defaultValues?.location ?? null
   )
   const [dateRange, setDateRange] = React.useState<{
@@ -96,7 +96,7 @@ export function BookingSearch({
       <div className="flex flex-col gap-3 md:flex-row md:gap-2 md:items-center">
         <div className="flex-1 relative">
           <LocationCombobox
-              title="Destination"
+              title="Destinazion"
               locations={locations}
               value={location}
               onChange={setLocation}

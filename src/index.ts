@@ -14,7 +14,7 @@ export {
 
 export type {
   AvailabilityDay,
-  Location,
+  SearchLocation,
   GuestData,
   BookingSearchPayload,
   BookingSearchProps,

@@ -20,7 +20,7 @@ export function LocationCombobox({
                                      disabled = false,
                                      className,
                                      tabIndex,
-                                     title
+                                     title = "Destinazion"
                                  }: LocationComboboxProps) {
     const [open, setOpen] = React.useState(false)
 
@@ -55,7 +55,7 @@ export function LocationCombobox({
                     <CommandList>
                         <CommandEmpty>No location found.</CommandEmpty>
                         <CommandGroup>
-                            {locations.map((location: any) => (
+                            {locations.map((location) => (
                                 <CommandItem
                                     key={location.id}
                                     value={location.name}

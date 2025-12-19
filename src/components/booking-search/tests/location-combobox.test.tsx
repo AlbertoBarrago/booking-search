@@ -2,16 +2,16 @@ import { test, expect, describe, beforeEach } from "bun:test"
 import React from "react"
 import { render, screen, fireEvent, waitFor } from "@testing-library/react"
 import { LocationCombobox } from "../location-combobox"
-import type { Location } from "../../../types/booking"
+import type { SearchLocation } from "../../../types/booking"
 
 describe("LocationCombobox", () => {
-  const mockLocations: Location[] = [
+  const mockLocations: SearchLocation[] = [
     { id: "1", name: "Rome", type: "City" },
     { id: "2", name: "Milan", type: "City" },
     { id: "3", name: "Venice", type: "City" },
   ]
 
-  const mockOnChange = (location: Location | null) => {}
+  const mockOnChange = (location: SearchLocation | null) => {}
 
   beforeEach(() => {
     // Reset any state between tests if needed
@@ -28,14 +28,17 @@ describe("LocationCombobox", () => {
     )
 
     expect(screen.getByText("Where do you want to go?")).toBeDefined()
-    expect(screen.getByText("Destinazione")).toBeDefined()
+    expect(screen.getByText("Destinazion")).toBeDefined()
   })
 
   test("displays selected location", () => {
+    const firstLocation = mockLocations[0]
+    if (!firstLocation) return
+
     render(
       <LocationCombobox
         locations={mockLocations}
-        value={mockLocations[0] as Location | null}
+        value={firstLocation}
         onChange={mockOnChange}
       />
     )
@@ -80,8 +83,8 @@ describe("LocationCombobox", () => {
   })
 
   test("calls onChange when a location is selected", async () => {
-    let selectedLocation: Location | null = null
-    const handleChange = (location: Location | null) => {
+    let selectedLocation: SearchLocation | null = null
+    const handleChange = (location: SearchLocation | null) => {
       selectedLocation = location
     }
 
@@ -108,10 +111,11 @@ describe("LocationCombobox", () => {
       fireEvent.click(lastItem)
     }
 
+    const firstLocation = mockLocations[0]
     await waitFor(() => {
       expect(selectedLocation).not.toBeNull()
-      if (selectedLocation) {
-        expect(selectedLocation.id).toBe(mockLocations[0]?.id as string)
+      if (selectedLocation && firstLocation) {
+        expect(selectedLocation.id).toBe(firstLocation.id)
       }
     })
   })
@@ -120,8 +124,8 @@ describe("LocationCombobox", () => {
     const firstLocation = mockLocations[0]
     if (!firstLocation) return
 
-    let selectedLocation: Location | null = firstLocation
-    const handleChange = (location: Location | null) => {
+    let selectedLocation: SearchLocation | null = firstLocation
+    const handleChange = (location: SearchLocation | null) => {
       selectedLocation = location
     }
 

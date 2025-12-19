@@ -46,7 +46,8 @@
     "type-check": "tsc --noEmit",
     "test": "bun test src/components/booking-search/tests/",
     "test:coverage": "bun test --coverage src/components/booking-search/tests/",
-    "prepublishOnly": "bun run type-check && bun run test && bun run build"
+    "prepublishOnly": "bun run type-check && bun run test && bun run build",
+    "ts:check": "tsc --noEmit"
   },
   "devDependencies": {
     "@happy-dom/global-registrator": "^20.0.11",
