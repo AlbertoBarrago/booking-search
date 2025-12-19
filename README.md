@@ -25,11 +25,11 @@ A framework-agnostic, high-performance, and accessible React component for booki
 ## 📦 Installation
 
 ```bash
-npm install @booking-search/react
+npm install @balby/booking-search
 # or
-yarn add @booking-search/react
+yarn add @balby/booking-search
 # or
-bun add @booking-search/react
+bun add @balby/booking-search
 ```
 
 ### Peer Dependencies
