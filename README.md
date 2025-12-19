@@ -45,8 +45,8 @@ npm install react react-dom tailwindcss
 ### Basic Usage
 
 ```tsx
-import { BookingSearch } from '@booking-search/react'
-import type { BookingSearchPayload, Location, AvailabilityDay } from '@booking-search/react'
+import { BookingSearch } from '@balby/booking-search'
+import type { BookingSearchPayload, Location, AvailabilityDay } from '@balby/booking-search'
 
 const locations: Location[] = [
   { id: '1', name: 'Rome, Italy', type: 'City', countryCode: 'IT' },
