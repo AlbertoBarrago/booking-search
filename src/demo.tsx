@@ -122,8 +122,6 @@ function Demo() {
           locations={sampleLocations}
           availability={availability}
           onSearch={handleSearch}
-          searchButtonText="Cerca disponibilità"
-          locationPlaceholder="Dove vuoi andare?"
           minNights={1}
           maxAdults={10}
           maxChildren={5}

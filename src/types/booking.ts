@@ -85,12 +85,15 @@ export interface LocationComboboxProps {
     value: Location | null | any,
     /** Callback when location changes */
     onChange: (location: Location | null | any) => void,
+    /** Optional title for the combobox */
+    title?: string,
     /** Placeholder text */
     placeholder?: string,
     /** Whether the combobox is disabled */
     disabled?: boolean,
     /** Custom CSS class */
     className?: string,
+    /** Tab index */
     tabIndex?: number
 }
 

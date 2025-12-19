@@ -42,8 +42,8 @@ export function BookingSearch({
   locations,
   onSearch,
   defaultValues,
-  searchButtonText = "Cerca",
-  locationPlaceholder = "Dove vuoi andare?",
+  searchButtonText = "Search",
+  locationPlaceholder = "Where do you want to go?",
   minNights = 1,
   maxAdults = 30,
   maxChildren = 10,
@@ -96,6 +96,7 @@ export function BookingSearch({
       <div className="flex flex-col gap-3 md:flex-row md:gap-2 md:items-center">
         <div className="flex-1 relative">
           <LocationCombobox
+              title="Destination"
               locations={locations}
               value={location}
               onChange={setLocation}
@@ -179,7 +180,7 @@ export function BookingSearch({
                 Dove vuoi andare?
               </span>
               <span className="text-xs text-slate-500">
-                {location?.name ?? "Destinazione"} • {guests.adults + guests.children}{" "}
+                {location?.name ?? "Destination"} • {guests.adults + guests.children}{" "}
                 {guests.adults + guests.children === 1 ? "ospite" : "ospiti"}
               </span>
             </div>
