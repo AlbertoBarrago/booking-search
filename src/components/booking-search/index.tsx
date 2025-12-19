@@ -91,7 +91,7 @@ export function BookingSearch({
       <div className="flex flex-col gap-3 md:flex-row md:gap-2 md:items-center">
         <div className="flex-1 relative focus-within:z-10">
           <LocationCombobox
-              title="Destination"
+              title="Destinazion"
               locations={locations}
               value={location}
               onChange={setLocation}
