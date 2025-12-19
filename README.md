@@ -1,6 +1,6 @@
 # BookingSearch (React)
 
-[![npm version](https://img.shields.io/npm/v/@booking-search/react.svg)](https://www.npmjs.com/package/@booking-search/react)
+[![npm version](https://img.shields.io/npm/v/@balby/booking-search.svg)](https://www.npmjs.com/package/@balby/booking-search)
 [![Coverage](https://img.shields.io/badge/coverage-94.73%25-brightgreen.svg)](./coverage)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.9-blue.svg)](https://www.typescriptlang.org/)
