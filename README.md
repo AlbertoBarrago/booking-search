@@ -78,9 +78,9 @@ const locations: SearchLocation[] = [
 ]
 
 const availability: AvailabilityDay[] = [
-  { date: '2025-01-15', price: 120, isAvailable: true },
-  { date: '2025-01-16', price: 150, isAvailable: true },
-  { date: '2025-01-17', price: 0, isAvailable: false },
+  { date: '2026-01-15', price: 120, isAvailable: true },
+  { date: '2026-01-16', price: 150, isAvailable: true },
+  { date: '2026-01-17', price: 0, isAvailable: false },
 ]
 
 function App() {
