@@ -89,36 +89,36 @@ export function BookingSearch({
 
   const SearchContent = () => (
       <div className="flex flex-col gap-3 md:flex-row md:gap-2 md:items-center">
-        <div className="flex-1 relative">
+        <div className="flex-1 relative focus-within:z-10">
           <LocationCombobox
               title="Destination"
               locations={locations}
               value={location}
               onChange={setLocation}
               placeholder={locationPlaceholder}
-              className="w-full border-0 md:rounded-l-lg md:rounded-r-none focus-visible:ring-0"
+              className="w-full border-0 md:rounded-l-lg md:rounded-r-none"
               tabIndex={1}
           />
         </div>
 
-        <div className="flex-1 relative">
+        <div className="flex-1 relative focus-within:z-10">
           <DateRangePicker
               availability={availability}
               value={dateRange}
               onChange={setDateRange}
               minNights={minNights}
-              className="w-full border-0 md:rounded-none focus-visible:ring-0"
+              className="w-full border-0 md:rounded-none"
               tabIndex={2}
           />
         </div>
 
-        <div className="flex-1 relative">
+        <div className="flex-1 relative focus-within:z-10">
           <GuestSelector
               value={guests}
               onChange={setGuests}
               maxAdults={maxAdults}
               maxChildren={maxChildren}
-              className="w-full border-0 md:rounded-none focus-visible:ring-0"
+              className="w-full border-0 md:rounded-none"
               tabIndex={3}
           />
         </div>
@@ -131,7 +131,7 @@ export function BookingSearch({
               aria-label={searchButtonText}
               tabIndex={4}
               className={cn(
-                  "flex h-12 w-full items-center justify-center gap-2 rounded-lg bg-blue-600 px-6 text-sm font-bold text-white transition-all hover:bg-blue-700 disabled:bg-slate-300 md:w-auto",
+                  "flex h-12 w-full items-center justify-center gap-2 rounded-lg bg-blue-600 px-6 text-sm font-bold text-white transition-all hover:bg-blue-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 focus-visible:shadow-lg disabled:bg-slate-300 md:w-auto",
               )}
           >
             <Search className="h-4 w-4" />

@@ -35,6 +35,12 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  /* Keyboard focus styles for better accessibility */
+  *:focus-visible {
+    outline: 1px solid #3b82f6;
+    outline-offset: 2px;
+  }
 }
 
 /* React Day Picker Custom Styles */

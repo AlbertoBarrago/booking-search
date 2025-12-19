@@ -151,7 +151,7 @@ export function DateRangePicker({
                     disabled={disabled}
                     tabIndex={tabIndex}
                     className={cn(
-                        "flex h-14 w-full items-center gap-3 rounded-lg border bg-white px-4 py-3 text-left text-sm transition-all hover:bg-slate-50 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50 relative",
+                        "flex h-14 w-full items-center gap-3 rounded-lg border bg-white px-4 py-3 text-left text-sm transition-all hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 focus-visible:border-blue-600 focus-visible:shadow-lg disabled:cursor-not-allowed disabled:opacity-50 relative",
                         open
                             ? "border-blue-500 ring-2 ring-blue-500 shadow-lg z-10"
                             : "border-slate-300",
