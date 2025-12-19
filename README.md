@@ -1,4 +1,4 @@
-# BookingSearch Widget
+# BookingSearch (React)
 
 [![npm version](https://img.shields.io/npm/v/@booking-search/react.svg)](https://www.npmjs.com/package/@booking-search/react)
 [![Coverage](https://img.shields.io/badge/coverage-94.73%25-brightgreen.svg)](./coverage)
