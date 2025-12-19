@@ -19,7 +19,7 @@ describe("GuestSelector", () => {
   test("renders with default guest count", () => {
     render(<GuestSelector value={mockValue} onChange={mockOnChange} />)
 
-    expect(screen.getByText("Ospiti")).toBeDefined()
+    expect(screen.getByText("Guests")).toBeDefined()
     expect(screen.getByText("2 adulti")).toBeDefined()
   })
 
