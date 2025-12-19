@@ -33,8 +33,8 @@ bun add @booking-widget/react
 ```
 
 ### Peer Dependencies
-
 This component requires React 19 and Tailwind CSS. Make sure they are installed:
+
 
 ```bash
 npm install react react-dom tailwindcss
@@ -218,6 +218,7 @@ BookingWidget/
 ## 🧪 Testing
 
 The project includes 63 tests with 94.73% coverage.
+
 
 ```bash
 # Run tests
