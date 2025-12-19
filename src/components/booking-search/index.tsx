@@ -103,7 +103,6 @@ export function BookingSearch({
               className="w-full border-0 md:rounded-l-lg md:rounded-r-none focus-visible:ring-0"
               tabIndex={1}
           />
-          <div className="hidden md:block absolute -right-1 top-1/4 h-1/2 w-px bg-slate-200" />
         </div>
 
         <div className="flex-1 relative">
@@ -115,7 +114,6 @@ export function BookingSearch({
               className="w-full border-0 md:rounded-none focus-visible:ring-0"
               tabIndex={2}
           />
-          <div className="hidden md:block absolute -right-1 top-1/4 h-1/2 w-px bg-slate-200" />
         </div>
 
         <div className="flex-1 relative">

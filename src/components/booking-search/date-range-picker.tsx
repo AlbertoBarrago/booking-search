@@ -6,7 +6,6 @@ import { Calendar } from "lucide-react"
 import { cn } from "../../lib/utils"
 import type { DateRangePickerProps, AvailabilityDay } from "../../types/booking"
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover"
-import "react-day-picker/dist/style.css"
 
 export function DateRangePicker({
                                     availability,
