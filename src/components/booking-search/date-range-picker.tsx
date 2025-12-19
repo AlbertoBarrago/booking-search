@@ -1,5 +1,4 @@
 import * as React from "react"
-<<<<<<< HEAD
 import {DayPicker} from "react-day-picker"
 import {format, parseISO, differenceInDays} from "date-fns"
 import {enUS} from "date-fns/locale"
@@ -7,24 +6,6 @@ import {Calendar} from "lucide-react"
 import {cn} from "../../lib/utils"
 import type {DateRangePickerProps, AvailabilityDay} from "../../types/booking"
 import {Popover, PopoverContent, PopoverTrigger} from "./ui/popover"
-||||||| parent of ddce065 (Move `react-day-picker` import to `globals.css`, remove redundant CSS imports in components, and clean up unused DOM elements in `BookingSearch`.)
-import { DayPicker } from "react-day-picker"
-import { format, parseISO, differenceInDays } from "date-fns"
-import { it } from "date-fns/locale"
-import { Calendar } from "lucide-react"
-import { cn } from "../../lib/utils"
-import type { DateRangePickerProps, AvailabilityDay } from "../../types/booking"
-import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover"
-import "react-day-picker/dist/style.css"
-=======
-import { DayPicker } from "react-day-picker"
-import { format, parseISO, differenceInDays } from "date-fns"
-import { it } from "date-fns/locale"
-import { Calendar } from "lucide-react"
-import { cn } from "../../lib/utils"
-import type { DateRangePickerProps, AvailabilityDay } from "../../types/booking"
-import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover"
->>>>>>> ddce065 (Move `react-day-picker` import to `globals.css`, remove redundant CSS imports in components, and clean up unused DOM elements in `BookingSearch`.)
 
 export function DateRangePicker({
                                     availability,
@@ -93,69 +74,9 @@ export function DateRangePicker({
         }
     }
 
-<<<<<<< HEAD
     const handleConfirm = () => {
         onChange(localValue)
         setOpen(false)
-||||||| parent of 417cebf (Remove debug `console.log` from `handleDayClick` in `DateRangePicker`.)
-  const availabilityMap = React.useMemo(() => {
-    const map = new Map<string, AvailabilityDay>()
-    availability.forEach((day) => {
-      map.set(day.date, day)
-    })
-    return map
-  }, [availability])
-
-  const disabledDays = React.useMemo(() => {
-    const disabled: Date[] = []
-    availability.forEach((day) => {
-      if (!day.isAvailable) {
-        disabled.push(parseISO(day.date))
-      }
-    })
-    return disabled
-  }, [availability])
-
-  const handleDayClick = (day: Date) => {
-    console.log("🖱️ Day clicked:", day)
-
-    if (!localValue.from || (localValue.from && localValue.to)) {
-      setLocalValue({ from: day, to: null })
-    } else {
-      if (day < localValue.from) {
-        setLocalValue({ from: day, to: localValue.from })
-      } else {
-        setLocalValue({ from: localValue.from, to: day })
-      }
-=======
-  const availabilityMap = React.useMemo(() => {
-    const map = new Map<string, AvailabilityDay>()
-    availability.forEach((day) => {
-      map.set(day.date, day)
-    })
-    return map
-  }, [availability])
-
-  const disabledDays = React.useMemo(() => {
-    const disabled: Date[] = []
-    availability.forEach((day) => {
-      if (!day.isAvailable) {
-        disabled.push(parseISO(day.date))
-      }
-    })
-    return disabled
-  }, [availability])
-
-  const handleDayClick = (day: Date) => {
-    if (!localValue.from || (localValue.from && localValue.to)) {
-      setLocalValue({ from: day, to: null })
-    } else {
-      if (day < localValue.from) {
-        setLocalValue({ from: day, to: localValue.from })
-      } else {
-        setLocalValue({ from: localValue.from, to: day })
-      }
->>>>>>> 417cebf (Remove debug `console.log` from `handleDayClick` in `DateRangePicker`.)
     }
 
     const handleCancel = () => {
