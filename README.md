@@ -1,6 +1,6 @@
 # BookingSearch Widget
 
-[![npm version](https://img.shields.io/npm/v/@booking-search/react.svg)](https://www.npmjs.com/package/@booking-search/react)
+[![npm version](https://img.shields.io/npm/v/@booking-widget/react.svg)](https://www.npmjs.com/package/@booking-widget/react)
 [![Coverage](https://img.shields.io/badge/coverage-94.73%25-brightgreen.svg)](./coverage)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.9-blue.svg)](https://www.typescriptlang.org/)
@@ -25,11 +25,11 @@ A framework-agnostic, high-performance, and accessible React component for booki
 ## 📦 Installation
 
 ```bash
-npm install @booking-search/react
+npm install @booking-widget/react
 # or
-yarn add @booking-search/react
+yarn add @booking-widget/react
 # or
-bun add @booking-search/react
+bun add @booking-widget/react
 ```
 
 ### Peer Dependencies
@@ -45,8 +45,8 @@ npm install react react-dom tailwindcss
 ### Basic Usage
 
 ```tsx
-import { BookingSearch } from '@booking-search/react'
-import type { BookingSearchPayload, Location, AvailabilityDay } from '@booking-search/react'
+import { BookingSearch } from '@booking-widget/react'
+import type { BookingSearchPayload, Location, AvailabilityDay } from '@booking-widget/react'
 
 const locations: Location[] = [
   { id: '1', name: 'Rome, Italy', type: 'City', countryCode: 'IT' },
@@ -152,7 +152,7 @@ export default {
 You can also use individual sub-components:
 
 ```tsx
-import { LocationCombobox, DateRangePicker, GuestSelector } from '@booking-search/react';
+import { LocationCombobox, DateRangePicker, GuestSelector } from '@booking-widget/react';
 
 // LocationCombobox
 <LocationCombobox
