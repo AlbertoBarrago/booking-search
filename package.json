@@ -1,5 +1,5 @@
 {
-  "name": "@booking-widget/react",
+  "name": "@booking-search/react",
   "version": "1.0.0",
   "description": "Componente React agnostico per ricerca booking, ispirato a Booking.com",
   "main": "./dist/index.js",
@@ -13,12 +13,12 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/yourusername/booking-widget.git"
+    "url": "https://github.com/AlbertoBarrago/booking-search.git"
   },
   "bugs": {
-    "url": "https://github.com/yourusername/booking-widget/issues"
+    "url": "https://github.com/AlbertoBarrago/booking-search/issues"
   },
-  "homepage": "https://github.com/yourusername/booking-widget#readme",
+  "homepage": "https://github.com/AlbertoBarrago/booking-search#readme",
   "keywords": [
     "react",
     "booking",
