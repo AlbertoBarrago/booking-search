@@ -45,7 +45,7 @@ describe("BookingSearch", () => {
       />
     )
 
-    expect(screen.getByText("Destinazion")).toBeDefined()
+    expect(screen.getByText("Destination")).toBeDefined()
     expect(screen.getByText("Check-in - Check-out")).toBeDefined()
     expect(screen.getByText("Ospiti")).toBeDefined()
     expect(screen.getByRole("button", { name: /search/i })).toBeDefined()
@@ -282,11 +282,11 @@ describe("BookingSearch", () => {
     expect(locationButton).toBeDefined()
 
     // Test date picker
-    const dateButton = screen.getByRole("button", { name: "Seleziona date" })
+    const dateButton = screen.getByRole("button", { name: "Select Date Range" })
     expect(dateButton).toBeDefined()
 
     // Test guest selector
-    const guestButton = screen.getByRole("button", { name: "Seleziona ospiti" })
+    const guestButton = screen.getByRole("button", { name: "Select guests" })
     expect(guestButton).toBeDefined()
 
     // Test search button
@@ -415,10 +415,10 @@ describe("BookingSearch", () => {
     const locationButton = screen.getByLabelText("Select location")
     expect(locationButton).toBeDefined()
 
-    const dateButton = screen.getByLabelText("Seleziona date")
+    const dateButton = screen.getByLabelText("Select Date Range")
     expect(dateButton).toBeDefined()
 
-    const guestButton = screen.getByLabelText("Seleziona ospiti")
+    const guestButton = screen.getByLabelText("Select guests")
     expect(guestButton).toBeDefined()
   })
 })

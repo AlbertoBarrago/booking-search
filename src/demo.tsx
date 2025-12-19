@@ -42,6 +42,12 @@ const sampleLocations: SearchLocation[] = [
     type: "Città",
     countryCode: "IT",
   },
+  {
+    id: "7",
+    name: "Cagliari, Italia",
+    type: "Città",
+    countryCode: "IT",
+  },
 ]
 
 // Function to generate sample availability data

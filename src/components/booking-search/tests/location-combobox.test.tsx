@@ -28,7 +28,7 @@ describe("LocationCombobox", () => {
     )
 
     expect(screen.getByText("Where do you want to go?")).toBeDefined()
-    expect(screen.getByText("Destinazion")).toBeDefined()
+    expect(screen.getByText("Destination")).toBeDefined()
   })
 
   test("displays selected location", () => {

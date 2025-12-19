@@ -39,7 +39,7 @@ describe("DateRangePicker", () => {
       />
     )
 
-    expect(screen.getByText("Seleziona date")).toBeDefined()
+    expect(screen.getByText("Select Date Range")).toBeDefined()
     expect(screen.getByText("Check-in - Check-out")).toBeDefined()
   })
 
@@ -78,12 +78,12 @@ describe("DateRangePicker", () => {
       />
     )
 
-    const button = screen.getByRole("button", { name: "Seleziona date" })
+    const button = screen.getByRole("button", { name: "Select Date Range" })
     fireEvent.click(button)
 
     await waitFor(() => {
-      expect(screen.getByText("Conferma")).toBeDefined()
-      expect(screen.getByText("Annulla")).toBeDefined()
+      expect(screen.getByText("Confirm")).toBeDefined()
+      expect(screen.getByText("Cancel")).toBeDefined()
     })
   })
 
@@ -101,11 +101,11 @@ describe("DateRangePicker", () => {
       />
     )
 
-    const button = screen.getByRole("button", { name: "Seleziona date" })
+    const button = screen.getByRole("button", { name: "Select Date Range" })
     fireEvent.click(button)
 
     await waitFor(() => {
-      expect(screen.getByText("Seleziona le date")).toBeDefined()
+      expect(screen.getByText("Confirm")).toBeDefined()
     })
   })
 
@@ -123,11 +123,11 @@ describe("DateRangePicker", () => {
       />
     )
 
-    const button = screen.getByRole("button", { name: "Seleziona date" })
+    const button = screen.getByRole("button", { name: "Select Date Range" })
     fireEvent.click(button)
 
     await waitFor(() => {
-      const confirmButton = screen.getByText("Conferma")
+      const confirmButton = screen.getByText("Confirm")
       expect(confirmButton).toBeDefined()
       // Confirm button should be disabled when no dates are selected
       expect(confirmButton.hasAttribute("disabled")).toBe(true)
@@ -148,11 +148,11 @@ describe("DateRangePicker", () => {
       />
     )
 
-    const button = screen.getByRole("button", { name: "Seleziona date" })
+    const button = screen.getByRole("button", { name: "Select Date Range" })
     fireEvent.click(button)
 
     await waitFor(() => {
-      expect(screen.getByText("Seleziona le date")).toBeDefined()
+      expect(screen.getByText("Confirm")).toBeDefined()
     })
 
     // Clicking on calendar dates would happen here, but that requires more complex interaction
@@ -169,17 +169,17 @@ describe("DateRangePicker", () => {
       />
     )
 
-    const button = screen.getByRole("button", { name: "Seleziona date" })
+    const button = screen.getByRole("button", { name: "Select Date Range" })
     fireEvent.click(button)
 
     await waitFor(() => {
-      const cancelButton = screen.getByText("Annulla")
+      const cancelButton = screen.getByText("Cancel")
       fireEvent.click(cancelButton)
     })
 
     // Popover should close
     await waitFor(() => {
-      expect(screen.queryByText("Annulla")).toBeNull()
+      expect(screen.queryByText("Cancel")).toBeNull()
     })
   })
 
@@ -192,11 +192,11 @@ describe("DateRangePicker", () => {
       />
     )
 
-    const button = screen.getByRole("button", { name: "Seleziona date" })
+    const button = screen.getByRole("button", { name: "Select Date Range" })
     fireEvent.click(button)
 
     await waitFor(() => {
-      expect(screen.getByText("7 notti")).toBeDefined()
+      expect(screen.getByText("7 nights")).toBeDefined()
     })
   })
 
@@ -209,11 +209,11 @@ describe("DateRangePicker", () => {
       />
     )
 
-    const button = screen.getByRole("button", { name: "Seleziona date" })
+    const button = screen.getByRole("button", { name: "Select Date Range" })
     fireEvent.click(button)
 
     await waitFor(() => {
-      expect(screen.getByText("1 notte")).toBeDefined()
+      expect(screen.getByText("1 night")).toBeDefined()
     })
   })
 
@@ -227,7 +227,7 @@ describe("DateRangePicker", () => {
       />
     )
 
-    const button = screen.getByRole("button", { name: "Seleziona date" })
+    const button = screen.getByRole("button", { name: "Select Date Range" })
     expect(button.hasAttribute("disabled")).toBe(true)
   })
 
@@ -254,18 +254,18 @@ describe("DateRangePicker", () => {
       />
     )
 
-    const button = screen.getByRole("button", { name: "Seleziona date" })
+    const button = screen.getByRole("button", { name: "Select Date Range" })
     fireEvent.click(button)
 
     await waitFor(() => {
-      expect(screen.getByText("Conferma")).toBeDefined()
+      expect(screen.getByText("Confirm")).toBeDefined()
     })
 
-    const confirmButton = screen.getByText("Conferma")
+    const confirmButton = screen.getByText("Confirm")
     fireEvent.click(confirmButton)
 
     await waitFor(() => {
-      expect(screen.queryByText("Conferma")).toBeNull()
+      expect(screen.queryByText("Confirm")).toBeNull()
     })
   })
 
@@ -278,11 +278,11 @@ describe("DateRangePicker", () => {
       />
     )
 
-    const button = screen.getByRole("button", { name: "Seleziona date" })
+    const button = screen.getByRole("button", { name: "Select Date Range" })
     fireEvent.click(button)
 
     await waitFor(() => {
-      expect(screen.getByText("Seleziona check-out")).toBeDefined()
+      expect(screen.getByText("Select check-out")).toBeDefined()
     })
   })
 
@@ -295,11 +295,11 @@ describe("DateRangePicker", () => {
       />
     )
 
-    const button = screen.getByRole("button", { name: "Seleziona date" })
+    const button = screen.getByRole("button", { name: "Select Date Range" })
     fireEvent.click(button)
 
     await waitFor(() => {
-      expect(screen.getByText("Conferma")).toBeDefined()
+      expect(screen.getByText("Confirm")).toBeDefined()
     })
 
     // Try to close by clicking outside - this is prevented by onInteractOutside
