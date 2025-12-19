@@ -1,10 +1,9 @@
 import React from "react"
 import { createRoot } from "react-dom/client"
-import { BookingSearch } from "./components/booking-search"
+import { BookingSearch } from "./components/booking-search";
 import type { BookingSearchPayload, SearchLocation, AvailabilityDay } from "./types/booking"
 import "./styles/output.css"
 
-// Sample location data
 const sampleLocations: SearchLocation[] = [
   {
     id: "1",
@@ -50,7 +49,6 @@ const sampleLocations: SearchLocation[] = [
   },
 ]
 
-// Function to generate sample availability data
 function generateAvailability(): AvailabilityDay[] {
   const availability: AvailabilityDay[] = []
   const today = new Date()
@@ -115,7 +113,7 @@ function Demo() {
       <div className="mx-auto max-w-6xl">
         <div className="mb-8 text-center">
           <h1 className="text-4xl font-bold text-slate-900 md:text-5xl">
-            BookingSearch Widget
+            BookingSearch
           </h1>
           <p className="mt-2 text-lg text-slate-600">
             Agnostic React component for booking search
@@ -170,8 +168,10 @@ function Demo() {
         <div className="mt-6 rounded-lg bg-slate-900 p-6 text-white">
           <h2 className="mb-4 text-xl font-semibold">💻 Usage</h2>
           <pre className="overflow-x-auto text-sm">
-            <code>{`import { BookingSearch } from './components/booking-search'
-import type { BookingSearchPayload } from './types/booking'
+            <code>{`import { BookingSearch } from '@balby/booking-search'
+import type { BookingSearchPayload, SearchLocation, AvailabilityDay } from '@balby/booking-search'
+
+...
 
 function App() {
   const handleSearch = (payload: BookingSearchPayload) => {
