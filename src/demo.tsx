@@ -1,11 +1,11 @@
 import React from "react"
 import { createRoot } from "react-dom/client"
 import { BookingSearch } from "./components/booking-search"
-import type { BookingSearchPayload, Location, AvailabilityDay } from "./types/booking"
+import type { BookingSearchPayload, SearchLocation, AvailabilityDay } from "./types/booking"
 import "./styles/output.css"
 
 // Sample location data
-const sampleLocations: Location[] = [
+const sampleLocations: SearchLocation[] = [
   {
     id: "1",
     name: "Roma, Italia",
@@ -39,6 +39,12 @@ const sampleLocations: Location[] = [
   {
     id: "6",
     name: "Torino, Italia",
+    type: "Città",
+    countryCode: "IT",
+  },
+  {
+    id: "7",
+    name: "Cagliari, Italia",
     type: "Città",
     countryCode: "IT",
   },
@@ -76,7 +82,6 @@ function Demo() {
   const handleSearch = (payload: BookingSearchPayload) => {
     console.log("🔍 Search performed:", payload)
 
-    // Calculate total price if dates are selected
     if (payload.checkIn && payload.checkOut) {
       const checkInStr = payload.checkIn.toISOString().split('T')[0]
       const checkOutStr = payload.checkOut.toISOString().split('T')[0]
@@ -91,7 +96,6 @@ function Demo() {
       console.log(`💰 Estimated total price: €${totalPrice}`)
       console.log(`📅 Number of nights: ${relevantDays.length}`)
 
-      // Show alert with details
       alert(
         `Search completed!\n\n` +
         `📍 Destination: ${payload.location?.name || 'Not selected'}\n` +
@@ -122,9 +126,7 @@ function Demo() {
           locations={sampleLocations}
           availability={availability}
           onSearch={handleSearch}
-          searchButtonText="Cerca disponibilità"
-          locationPlaceholder="Dove vuoi andare?"
-          minNights={1}
+          minNights={2}
           maxAdults={10}
           maxChildren={5}
         />

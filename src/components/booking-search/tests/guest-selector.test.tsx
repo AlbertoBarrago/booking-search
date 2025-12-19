@@ -59,7 +59,7 @@ describe("GuestSelector", () => {
   test("opens popover when button is clicked", async () => {
     render(<GuestSelector value={mockValue} onChange={mockOnChange} />)
 
-    const button = screen.getByRole("button", { name: "Seleziona ospiti" })
+    const button = screen.getByRole("button", { name: "Select guests" })
     fireEvent.click(button)
 
     await waitFor(() => {
@@ -71,7 +71,7 @@ describe("GuestSelector", () => {
   test("displays guest steppers in popover", async () => {
     render(<GuestSelector value={mockValue} onChange={mockOnChange} />)
 
-    const button = screen.getByRole("button", { name: "Seleziona ospiti" })
+    const button = screen.getByRole("button", { name: "Select guests" })
     fireEvent.click(button)
 
     await waitFor(() => {
@@ -90,7 +90,7 @@ describe("GuestSelector", () => {
 
     render(<GuestSelector value={currentValue} onChange={handleChange} />)
 
-    const button = screen.getByRole("button", { name: "Seleziona ospiti" })
+    const button = screen.getByRole("button", { name: "Select guests" })
     fireEvent.click(button)
 
     await waitFor(() => {
@@ -114,7 +114,7 @@ describe("GuestSelector", () => {
 
     render(<GuestSelector value={currentValue} onChange={handleChange} />)
 
-    const button = screen.getByRole("button", { name: "Seleziona ospiti" })
+    const button = screen.getByRole("button", { name: "Select guests" })
     fireEvent.click(button)
 
     await waitFor(() => {
@@ -138,7 +138,7 @@ describe("GuestSelector", () => {
 
     render(<GuestSelector value={currentValue} onChange={handleChange} />)
 
-    const button = screen.getByRole("button", { name: "Seleziona ospiti" })
+    const button = screen.getByRole("button", { name: "Select guests" })
     fireEvent.click(button)
 
     await waitFor(() => {
@@ -162,7 +162,7 @@ describe("GuestSelector", () => {
 
     render(<GuestSelector value={currentValue} onChange={handleChange} />)
 
-    const button = screen.getByRole("button", { name: "Seleziona ospiti" })
+    const button = screen.getByRole("button", { name: "Select guests" })
     fireEvent.click(button)
 
     await waitFor(() => {
@@ -186,7 +186,7 @@ describe("GuestSelector", () => {
       />
     )
 
-    const button = screen.getByRole("button", { name: "Seleziona ospiti" })
+    const button = screen.getByRole("button", { name: "Select guests" })
     fireEvent.click(button)
 
     await waitFor(() => {
@@ -203,7 +203,7 @@ describe("GuestSelector", () => {
       />
     )
 
-    const button = screen.getByRole("button", { name: "Seleziona ospiti" })
+    const button = screen.getByRole("button", { name: "Select guests" })
     fireEvent.click(button)
 
     await waitFor(() => {
@@ -221,7 +221,7 @@ describe("GuestSelector", () => {
       />
     )
 
-    const button = screen.getByRole("button", { name: "Seleziona ospiti" })
+    const button = screen.getByRole("button", { name: "Select guests" })
     fireEvent.click(button)
 
     await waitFor(() => {
@@ -239,7 +239,7 @@ describe("GuestSelector", () => {
       />
     )
 
-    const button = screen.getByRole("button", { name: "Seleziona ospiti" })
+    const button = screen.getByRole("button", { name: "Select guests" })
     fireEvent.click(button)
 
     await waitFor(() => {
@@ -261,7 +261,7 @@ describe("GuestSelector", () => {
       />
     )
 
-    const button = screen.getByRole("button", { name: "Seleziona ospiti" })
+    const button = screen.getByRole("button", { name: "Select guests" })
     fireEvent.click(button)
 
     await waitFor(() => {
@@ -290,7 +290,7 @@ describe("GuestSelector", () => {
       />
     )
 
-    const button = screen.getByRole("button", { name: "Seleziona ospiti" })
+    const button = screen.getByRole("button", { name: "Select guests" })
     fireEvent.click(button)
 
     await waitFor(() => {
@@ -321,7 +321,7 @@ describe("GuestSelector", () => {
       />
     )
 
-    const button = screen.getByRole("button", { name: "Seleziona ospiti" })
+    const button = screen.getByRole("button", { name: "Select guests" })
     expect(button.hasAttribute("disabled")).toBe(true)
   })
 
@@ -341,7 +341,7 @@ describe("GuestSelector", () => {
   test("closes popover after confirming selection", async () => {
     render(<GuestSelector value={mockValue} onChange={mockOnChange} />)
 
-    const button = screen.getByRole("button", { name: "Seleziona ospiti" })
+    const button = screen.getByRole("button", { name: "Select guests" })
     fireEvent.click(button)
 
     await waitFor(() => {

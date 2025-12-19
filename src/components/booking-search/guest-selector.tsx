@@ -122,8 +122,9 @@ export function GuestSelector({
       <PopoverTrigger asChild>
         <button
           type="button"
-          aria-label="Seleziona ospiti"
+          aria-label="Select guests"
           disabled={disabled}
+          tabIndex={tabIndex}
           className={cn(
             "flex h-14 w-full items-center gap-3 rounded-lg border border-slate-300 bg-white px-4 py-3 text-left text-sm transition-colors hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
             className

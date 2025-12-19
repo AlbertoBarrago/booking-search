@@ -1,22 +1,20 @@
 /**
- * BookingSearch Widget
- * Componente React agnostico per ricerca booking ispirato a Booking.com
+ * BookingSearch Component
  */
 
-// Esporta il componente principale
+import "./styles/output.css"
+
 export { BookingSearch } from "./components/booking-search"
 
-// Esporta i sotto-componenti per uso standalone
 export {
   LocationCombobox,
   DateRangePicker,
   GuestSelector,
 } from "./components/booking-search"
 
-// Esporta tutti i tipi TypeScript
 export type {
   AvailabilityDay,
-  Location,
+  SearchLocation,
   GuestData,
   BookingSearchPayload,
   BookingSearchProps,
@@ -26,5 +24,4 @@ export type {
   GuestStepperProps,
 } from "./types/booking"
 
-// Esporta utility
 export { cn } from "./lib/utils"
