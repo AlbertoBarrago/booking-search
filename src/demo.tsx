@@ -181,9 +181,12 @@ function App() {
 
   return (
     <BookingSearch
-      locations={locations}
+      locations={sampleLocations}
       availability={availability}
       onSearch={handleSearch}
+      minNights={2}
+      maxAdults={10}
+      maxChildren={5}
     />
   )
 }`}</code>
