@@ -18,6 +18,18 @@ export function DateRangePicker({
                                 }: DateRangePickerProps) {
     const [open, setOpen] = React.useState(false)
     const [localValue, setLocalValue] = React.useState(value)
+    const [isMobile, setIsMobile] = React.useState(false)
+
+    React.useEffect(() => {
+        const checkMobile = () => {
+            setIsMobile(window.innerWidth < 768)
+        }
+
+        checkMobile()
+        window.addEventListener('resize', checkMobile)
+
+        return () => window.removeEventListener('resize', checkMobile)
+    }, [])
 
     React.useEffect(() => {
         if (open) {
@@ -175,14 +187,15 @@ export function DateRangePicker({
                 </button>
             </PopoverTrigger>
             <PopoverContent
-                className="w-auto p-0 shadow-2xl"
-                align="start"
-                sideOffset={8}
+                className="w-auto p-0 shadow-2xl max-w-[calc(100vw-2rem)] max-h-[calc(100vh-4rem)] overflow-y-auto"
+                align={isMobile ? "center" : "start"}
+                side={isMobile ? "bottom" : "bottom"}
+                sideOffset={isMobile ? 4 : 8}
                 onInteractOutside={(e) => {
                     e.preventDefault()
                 }}
             >
-                <div className="p-4">
+                <div className="p-2 sm:p-4">
                     <DayPicker
                         mode="range"
                         defaultMonth={localValue.from || new Date()}
@@ -195,14 +208,14 @@ export function DateRangePicker({
                         modifiers={modifiers}
                         modifiersClassNames={modifiersClassNames}
                         locale={enUS}
-                        numberOfMonths={2}
+                        numberOfMonths={isMobile ? 1 : 2}
                         className="rdp-custom"
                         formatters={{
                             formatDay: renderDay,
                         }}
                     />
 
-                    <div className="border-t border-slate-200 p-4 space-y-3">
+                    <div className="border-t border-slate-200 p-2 sm:p-4 space-y-3">
                         <div className="text-center">
                             <p className="text-sm font-medium text-slate-700">
                                 {formatLocalDateRange()}

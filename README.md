@@ -15,7 +15,6 @@ A framework-agnostic, high-performance, and accessible React component for booki
 * ✅ **Accessibility**: Full keyboard navigation and ARIA attributes (Radix UI)
 * ✅ **Responsive**: Horizontal layout on desktop, Dialog on mobile
 * ✅ **Modular Components**:
-
   * `LocationCombobox`: Location search using the Command pattern (Shadcn)
   * `DateRangePicker`: Calendar with inline prices and availability
   * `GuestSelector`: Stepper for adults and children
@@ -68,8 +67,8 @@ import '@balby/booking-search/dist/index.css'
 **Important:** You must import the CSS file for the component to display correctly.
 
 ```tsx
-import { BookingSearch } from '@balby/booking-search'
 import '@balby/booking-search/styles'
+import { BookingSearch } from '@balby/booking-search'
 import type { BookingSearchPayload, SearchLocation, AvailabilityDay } from '@balby/booking-search'
 
 const locations: SearchLocation[] = [
@@ -173,11 +172,11 @@ export default {
 
 ## 🔧 Standalone Sub-components
 
-You can also use individual sub-components:
+You can also use individual subcomponents:
 
 ```tsx
-import { LocationCombobox, DateRangePicker, GuestSelector } from '@balby/booking-search'
-import '@balby/booking-search/styles'
+import { LocationCombobox, DateRangePicker, GuestSelector } from '@balby/booking-search';
+import '@balby/booking-search/styles';
 
 // LocationCombobox
 <LocationCombobox
@@ -244,7 +243,6 @@ BookingWidget/
 
 The project includes 63 tests with 94.73% coverage.
 
-
 ```bash
 # Run tests
 npm test
@@ -277,3 +275,4 @@ MIT
 * Icons: [Lucide React](https://lucide.dev)
 * Date picker: [react-day-picker](https://react-day-picker.js.org)
 * Built with [Bun](https://bun.sh)
+* Thanks to Claude Code for being a great teammate!

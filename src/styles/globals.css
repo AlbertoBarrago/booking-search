@@ -43,6 +43,28 @@
   }
 }
 
+/* GitHub Octocat wave animation */
+@keyframes wave {
+  0% {
+    transform: rotate(0deg);
+  }
+  20% {
+    transform: rotate(-25deg);
+  }
+  40% {
+    transform: rotate(10deg);
+  }
+  60% {
+    transform: rotate(-25deg);
+  }
+  80% {
+    transform: rotate(10deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
 /* React Day Picker Custom Styles */
 .rdp {
   --rdp-cell-size: 56px;
@@ -161,4 +183,84 @@
 
 .rdp-day_disabled:hover {
   background-color: transparent !important;
+}
+
+/* Navigation buttons */
+.rdp-nav {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.rdp-button_previous,
+.rdp-button_next {
+  width: 32px !important;
+  height: 32px !important;
+  padding: 0 !important;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.375rem;
+  background-color: white;
+  border: 1px solid #e2e8f0;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.rdp-button_previous:hover:not(:disabled),
+.rdp-button_next:hover:not(:disabled) {
+  background-color: #f1f5f9;
+  border-color: #cbd5e1;
+}
+
+.rdp-button_previous:disabled,
+.rdp-button_next:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* Mobile responsive styles */
+@media (max-width: 767px) {
+  .rdp-custom {
+    --rdp-cell-size: 40px;
+  }
+
+  .rdp-cell {
+    width: 40px;
+    height: 40px;
+  }
+
+  .rdp-months {
+    gap: 0;
+  }
+
+  .rdp-caption {
+    padding: 0.5rem 0;
+  }
+
+  .rdp-caption_label {
+    font-size: 0.875rem;
+  }
+
+  .rdp-head_cell {
+    font-size: 0.7rem;
+    padding-bottom: 0.25rem;
+  }
+
+  .rdp-button {
+    font-size: 0.7rem;
+    gap: 1px;
+    padding: 1px;
+  }
+
+  .rdp-button_previous,
+  .rdp-button_next {
+    width: 28px !important;
+    height: 28px !important;
+  }
+
+  /* Make price text smaller on mobile */
+  .rdp-button .text-\[10px\] {
+    font-size: 7px;
+  }
 }
