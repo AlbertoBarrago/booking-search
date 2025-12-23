@@ -27889,6 +27889,15 @@ function DateRangePicker({
 }) {
   const [open, setOpen] = React38.useState(false);
   const [localValue, setLocalValue] = React38.useState(value);
+  const [isMobile, setIsMobile] = React38.useState(false);
+  React38.useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
   React38.useEffect(() => {
     if (open) {
       setLocalValue(value);
@@ -28034,14 +28043,15 @@ function DateRangePicker({
         }, undefined, true, undefined, this)
       }, undefined, false, undefined, this),
       /* @__PURE__ */ jsx_dev_runtime4.jsxDEV(PopoverContent2, {
-        className: "w-auto p-0 shadow-2xl",
-        align: "start",
-        sideOffset: 8,
+        className: "w-auto p-0 shadow-2xl max-w-[calc(100vw-2rem)] max-h-[calc(100vh-4rem)] overflow-y-auto",
+        align: isMobile ? "center" : "start",
+        side: isMobile ? "bottom" : "bottom",
+        sideOffset: isMobile ? 4 : 8,
         onInteractOutside: (e) => {
           e.preventDefault();
         },
         children: /* @__PURE__ */ jsx_dev_runtime4.jsxDEV("div", {
-          className: "p-4",
+          className: "p-2 sm:p-4",
           children: [
             /* @__PURE__ */ jsx_dev_runtime4.jsxDEV(DayPicker, {
               mode: "range",
@@ -28055,14 +28065,14 @@ function DateRangePicker({
               modifiers,
               modifiersClassNames,
               locale: enUS,
-              numberOfMonths: 2,
+              numberOfMonths: isMobile ? 1 : 2,
               className: "rdp-custom",
               formatters: {
                 formatDay: renderDay
               }
             }, undefined, false, undefined, this),
             /* @__PURE__ */ jsx_dev_runtime4.jsxDEV("div", {
-              className: "border-t border-slate-200 p-4 space-y-3",
+              className: "border-t border-slate-200 p-2 sm:p-4 space-y-3",
               children: [
                 /* @__PURE__ */ jsx_dev_runtime4.jsxDEV("div", {
                   className: "text-center",
@@ -28608,174 +28618,203 @@ function Demo() {
   };
   return /* @__PURE__ */ jsx_dev_runtime8.jsxDEV("div", {
     className: "min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4 md:p-8",
-    children: /* @__PURE__ */ jsx_dev_runtime8.jsxDEV("div", {
-      className: "mx-auto max-w-6xl",
-      children: [
-        /* @__PURE__ */ jsx_dev_runtime8.jsxDEV("div", {
-          className: "mb-8 text-center",
+    children: [
+      /* @__PURE__ */ jsx_dev_runtime8.jsxDEV("a", {
+        href: "https://github.com/AlbertoBarrago/booking-search",
+        target: "_blank",
+        rel: "noopener noreferrer",
+        className: "fixed right-0 top-0 z-50 group",
+        "aria-label": "View source on GitHub",
+        children: /* @__PURE__ */ jsx_dev_runtime8.jsxDEV("svg", {
+          width: "80",
+          height: "80",
+          viewBox: "0 0 250 250",
+          className: "fill-slate-900 text-white transition-colors duration-300 group-hover:fill-slate-700",
+          "aria-hidden": "true",
           children: [
-            /* @__PURE__ */ jsx_dev_runtime8.jsxDEV("h1", {
-              className: "text-4xl font-bold text-slate-900 md:text-5xl",
-              children: "BookingSearch"
+            /* @__PURE__ */ jsx_dev_runtime8.jsxDEV("path", {
+              d: "M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"
             }, undefined, false, undefined, this),
-            /* @__PURE__ */ jsx_dev_runtime8.jsxDEV("p", {
-              className: "mt-2 text-lg text-slate-600",
-              children: "Agnostic React component for booking search"
+            /* @__PURE__ */ jsx_dev_runtime8.jsxDEV("path", {
+              d: "M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2",
+              fill: "currentColor",
+              className: "origin-[130px_106px] group-hover:animate-[wave_560ms_ease-in-out]"
+            }, undefined, false, undefined, this),
+            /* @__PURE__ */ jsx_dev_runtime8.jsxDEV("path", {
+              d: "M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z",
+              fill: "currentColor"
             }, undefined, false, undefined, this)
           ]
-        }, undefined, true, undefined, this),
-        /* @__PURE__ */ jsx_dev_runtime8.jsxDEV(BookingSearch, {
-          locations: sampleLocations,
-          availability,
-          onSearch: handleSearch,
-          minNights: 2,
-          maxAdults: 10,
-          maxChildren: 5
-        }, undefined, false, undefined, this),
-        /* @__PURE__ */ jsx_dev_runtime8.jsxDEV("div", {
-          className: "mt-8 rounded-lg bg-white p-6 shadow-lg",
-          children: [
-            /* @__PURE__ */ jsx_dev_runtime8.jsxDEV("h2", {
-              className: "mb-4 text-xl font-semibold text-slate-900",
-              children: "\uD83D\uDCCB Features"
-            }, undefined, false, undefined, this),
-            /* @__PURE__ */ jsx_dev_runtime8.jsxDEV("ul", {
-              className: "space-y-2 text-slate-700",
-              children: [
-                /* @__PURE__ */ jsx_dev_runtime8.jsxDEV("li", {
-                  className: "flex items-start gap-2",
-                  children: [
-                    /* @__PURE__ */ jsx_dev_runtime8.jsxDEV("span", {
-                      className: "text-green-500",
-                      children: "✓"
-                    }, undefined, false, undefined, this),
-                    /* @__PURE__ */ jsx_dev_runtime8.jsxDEV("span", {
-                      children: [
-                        /* @__PURE__ */ jsx_dev_runtime8.jsxDEV("strong", {
-                          children: "Location Combobox:"
-                        }, undefined, false, undefined, this),
-                        " Smart search with Command pattern (Shadcn)"
-                      ]
-                    }, undefined, true, undefined, this)
-                  ]
-                }, undefined, true, undefined, this),
-                /* @__PURE__ */ jsx_dev_runtime8.jsxDEV("li", {
-                  className: "flex items-start gap-2",
-                  children: [
-                    /* @__PURE__ */ jsx_dev_runtime8.jsxDEV("span", {
-                      className: "text-green-500",
-                      children: "✓"
-                    }, undefined, false, undefined, this),
-                    /* @__PURE__ */ jsx_dev_runtime8.jsxDEV("span", {
-                      children: [
-                        /* @__PURE__ */ jsx_dev_runtime8.jsxDEV("strong", {
-                          children: "Date Range Picker:"
-                        }, undefined, false, undefined, this),
-                        " Calendar with inline prices and availability"
-                      ]
-                    }, undefined, true, undefined, this)
-                  ]
-                }, undefined, true, undefined, this),
-                /* @__PURE__ */ jsx_dev_runtime8.jsxDEV("li", {
-                  className: "flex items-start gap-2",
-                  children: [
-                    /* @__PURE__ */ jsx_dev_runtime8.jsxDEV("span", {
-                      className: "text-green-500",
-                      children: "✓"
-                    }, undefined, false, undefined, this),
-                    /* @__PURE__ */ jsx_dev_runtime8.jsxDEV("span", {
-                      children: [
-                        /* @__PURE__ */ jsx_dev_runtime8.jsxDEV("strong", {
-                          children: "Guest Selector:"
-                        }, undefined, false, undefined, this),
-                        " Stepper for adults and children"
-                      ]
-                    }, undefined, true, undefined, this)
-                  ]
-                }, undefined, true, undefined, this),
-                /* @__PURE__ */ jsx_dev_runtime8.jsxDEV("li", {
-                  className: "flex items-start gap-2",
-                  children: [
-                    /* @__PURE__ */ jsx_dev_runtime8.jsxDEV("span", {
-                      className: "text-green-500",
-                      children: "✓"
-                    }, undefined, false, undefined, this),
-                    /* @__PURE__ */ jsx_dev_runtime8.jsxDEV("span", {
-                      children: [
-                        /* @__PURE__ */ jsx_dev_runtime8.jsxDEV("strong", {
-                          children: "Responsive Design:"
-                        }, undefined, false, undefined, this),
-                        " Horizontal bar on desktop, Dialog on mobile"
-                      ]
-                    }, undefined, true, undefined, this)
-                  ]
-                }, undefined, true, undefined, this),
-                /* @__PURE__ */ jsx_dev_runtime8.jsxDEV("li", {
-                  className: "flex items-start gap-2",
-                  children: [
-                    /* @__PURE__ */ jsx_dev_runtime8.jsxDEV("span", {
-                      className: "text-green-500",
-                      children: "✓"
-                    }, undefined, false, undefined, this),
-                    /* @__PURE__ */ jsx_dev_runtime8.jsxDEV("span", {
-                      children: [
-                        /* @__PURE__ */ jsx_dev_runtime8.jsxDEV("strong", {
-                          children: "Accessibility:"
-                        }, undefined, false, undefined, this),
-                        " ARIA attributes, full keyboard navigation"
-                      ]
-                    }, undefined, true, undefined, this)
-                  ]
-                }, undefined, true, undefined, this),
-                /* @__PURE__ */ jsx_dev_runtime8.jsxDEV("li", {
-                  className: "flex items-start gap-2",
-                  children: [
-                    /* @__PURE__ */ jsx_dev_runtime8.jsxDEV("span", {
-                      className: "text-green-500",
-                      children: "✓"
-                    }, undefined, false, undefined, this),
-                    /* @__PURE__ */ jsx_dev_runtime8.jsxDEV("span", {
-                      children: [
-                        /* @__PURE__ */ jsx_dev_runtime8.jsxDEV("strong", {
-                          children: "Type-Safe:"
-                        }, undefined, false, undefined, this),
-                        " TypeScript with complete interfaces"
-                      ]
-                    }, undefined, true, undefined, this)
-                  ]
-                }, undefined, true, undefined, this),
-                /* @__PURE__ */ jsx_dev_runtime8.jsxDEV("li", {
-                  className: "flex items-start gap-2",
-                  children: [
-                    /* @__PURE__ */ jsx_dev_runtime8.jsxDEV("span", {
-                      className: "text-green-500",
-                      children: "✓"
-                    }, undefined, false, undefined, this),
-                    /* @__PURE__ */ jsx_dev_runtime8.jsxDEV("span", {
-                      children: [
-                        /* @__PURE__ */ jsx_dev_runtime8.jsxDEV("strong", {
-                          children: "Agnostic:"
-                        }, undefined, false, undefined, this),
-                        " Input data via props, results via callback"
-                      ]
-                    }, undefined, true, undefined, this)
-                  ]
-                }, undefined, true, undefined, this)
-              ]
-            }, undefined, true, undefined, this)
-          ]
-        }, undefined, true, undefined, this),
-        /* @__PURE__ */ jsx_dev_runtime8.jsxDEV("div", {
-          className: "mt-6 rounded-lg bg-slate-900 p-6 text-white",
-          children: [
-            /* @__PURE__ */ jsx_dev_runtime8.jsxDEV("h2", {
-              className: "mb-4 text-xl font-semibold",
-              children: "\uD83D\uDCBB Usage"
-            }, undefined, false, undefined, this),
-            /* @__PURE__ */ jsx_dev_runtime8.jsxDEV("pre", {
-              className: "overflow-x-auto text-sm",
-              children: /* @__PURE__ */ jsx_dev_runtime8.jsxDEV("code", {
-                children: `import { BookingSearch } from '@balby/booking-search'
+        }, undefined, true, undefined, this)
+      }, undefined, false, undefined, this),
+      /* @__PURE__ */ jsx_dev_runtime8.jsxDEV("div", {
+        className: "mx-auto max-w-6xl",
+        children: [
+          /* @__PURE__ */ jsx_dev_runtime8.jsxDEV("div", {
+            className: "mb-8 text-center",
+            children: [
+              /* @__PURE__ */ jsx_dev_runtime8.jsxDEV("h1", {
+                className: "text-4xl font-bold text-slate-900 md:text-5xl",
+                children: "BookingSearch"
+              }, undefined, false, undefined, this),
+              /* @__PURE__ */ jsx_dev_runtime8.jsxDEV("p", {
+                className: "mt-2 text-lg text-slate-600",
+                children: "Agnostic React component for booking search"
+              }, undefined, false, undefined, this)
+            ]
+          }, undefined, true, undefined, this),
+          /* @__PURE__ */ jsx_dev_runtime8.jsxDEV(BookingSearch, {
+            locations: sampleLocations,
+            availability,
+            onSearch: handleSearch,
+            minNights: 2,
+            maxAdults: 10,
+            maxChildren: 5
+          }, undefined, false, undefined, this),
+          /* @__PURE__ */ jsx_dev_runtime8.jsxDEV("div", {
+            className: "mt-8 rounded-lg bg-white p-6 shadow-lg",
+            children: [
+              /* @__PURE__ */ jsx_dev_runtime8.jsxDEV("h2", {
+                className: "mb-4 text-xl font-semibold text-slate-900",
+                children: "\uD83D\uDCCB Features"
+              }, undefined, false, undefined, this),
+              /* @__PURE__ */ jsx_dev_runtime8.jsxDEV("ul", {
+                className: "space-y-2 text-slate-700",
+                children: [
+                  /* @__PURE__ */ jsx_dev_runtime8.jsxDEV("li", {
+                    className: "flex items-start gap-2",
+                    children: [
+                      /* @__PURE__ */ jsx_dev_runtime8.jsxDEV("span", {
+                        className: "text-green-500",
+                        children: "✓"
+                      }, undefined, false, undefined, this),
+                      /* @__PURE__ */ jsx_dev_runtime8.jsxDEV("span", {
+                        children: [
+                          /* @__PURE__ */ jsx_dev_runtime8.jsxDEV("strong", {
+                            children: "Location Combobox:"
+                          }, undefined, false, undefined, this),
+                          " Smart search with Command pattern (Shadcn)"
+                        ]
+                      }, undefined, true, undefined, this)
+                    ]
+                  }, undefined, true, undefined, this),
+                  /* @__PURE__ */ jsx_dev_runtime8.jsxDEV("li", {
+                    className: "flex items-start gap-2",
+                    children: [
+                      /* @__PURE__ */ jsx_dev_runtime8.jsxDEV("span", {
+                        className: "text-green-500",
+                        children: "✓"
+                      }, undefined, false, undefined, this),
+                      /* @__PURE__ */ jsx_dev_runtime8.jsxDEV("span", {
+                        children: [
+                          /* @__PURE__ */ jsx_dev_runtime8.jsxDEV("strong", {
+                            children: "Date Range Picker:"
+                          }, undefined, false, undefined, this),
+                          " Calendar with inline prices and availability"
+                        ]
+                      }, undefined, true, undefined, this)
+                    ]
+                  }, undefined, true, undefined, this),
+                  /* @__PURE__ */ jsx_dev_runtime8.jsxDEV("li", {
+                    className: "flex items-start gap-2",
+                    children: [
+                      /* @__PURE__ */ jsx_dev_runtime8.jsxDEV("span", {
+                        className: "text-green-500",
+                        children: "✓"
+                      }, undefined, false, undefined, this),
+                      /* @__PURE__ */ jsx_dev_runtime8.jsxDEV("span", {
+                        children: [
+                          /* @__PURE__ */ jsx_dev_runtime8.jsxDEV("strong", {
+                            children: "Guest Selector:"
+                          }, undefined, false, undefined, this),
+                          " Stepper for adults and children"
+                        ]
+                      }, undefined, true, undefined, this)
+                    ]
+                  }, undefined, true, undefined, this),
+                  /* @__PURE__ */ jsx_dev_runtime8.jsxDEV("li", {
+                    className: "flex items-start gap-2",
+                    children: [
+                      /* @__PURE__ */ jsx_dev_runtime8.jsxDEV("span", {
+                        className: "text-green-500",
+                        children: "✓"
+                      }, undefined, false, undefined, this),
+                      /* @__PURE__ */ jsx_dev_runtime8.jsxDEV("span", {
+                        children: [
+                          /* @__PURE__ */ jsx_dev_runtime8.jsxDEV("strong", {
+                            children: "Responsive Design:"
+                          }, undefined, false, undefined, this),
+                          " Horizontal bar on desktop, Dialog on mobile"
+                        ]
+                      }, undefined, true, undefined, this)
+                    ]
+                  }, undefined, true, undefined, this),
+                  /* @__PURE__ */ jsx_dev_runtime8.jsxDEV("li", {
+                    className: "flex items-start gap-2",
+                    children: [
+                      /* @__PURE__ */ jsx_dev_runtime8.jsxDEV("span", {
+                        className: "text-green-500",
+                        children: "✓"
+                      }, undefined, false, undefined, this),
+                      /* @__PURE__ */ jsx_dev_runtime8.jsxDEV("span", {
+                        children: [
+                          /* @__PURE__ */ jsx_dev_runtime8.jsxDEV("strong", {
+                            children: "Accessibility:"
+                          }, undefined, false, undefined, this),
+                          " ARIA attributes, full keyboard navigation"
+                        ]
+                      }, undefined, true, undefined, this)
+                    ]
+                  }, undefined, true, undefined, this),
+                  /* @__PURE__ */ jsx_dev_runtime8.jsxDEV("li", {
+                    className: "flex items-start gap-2",
+                    children: [
+                      /* @__PURE__ */ jsx_dev_runtime8.jsxDEV("span", {
+                        className: "text-green-500",
+                        children: "✓"
+                      }, undefined, false, undefined, this),
+                      /* @__PURE__ */ jsx_dev_runtime8.jsxDEV("span", {
+                        children: [
+                          /* @__PURE__ */ jsx_dev_runtime8.jsxDEV("strong", {
+                            children: "Type-Safe:"
+                          }, undefined, false, undefined, this),
+                          " TypeScript with complete interfaces"
+                        ]
+                      }, undefined, true, undefined, this)
+                    ]
+                  }, undefined, true, undefined, this),
+                  /* @__PURE__ */ jsx_dev_runtime8.jsxDEV("li", {
+                    className: "flex items-start gap-2",
+                    children: [
+                      /* @__PURE__ */ jsx_dev_runtime8.jsxDEV("span", {
+                        className: "text-green-500",
+                        children: "✓"
+                      }, undefined, false, undefined, this),
+                      /* @__PURE__ */ jsx_dev_runtime8.jsxDEV("span", {
+                        children: [
+                          /* @__PURE__ */ jsx_dev_runtime8.jsxDEV("strong", {
+                            children: "Agnostic:"
+                          }, undefined, false, undefined, this),
+                          " Input data via props, results via callback"
+                        ]
+                      }, undefined, true, undefined, this)
+                    ]
+                  }, undefined, true, undefined, this)
+                ]
+              }, undefined, true, undefined, this)
+            ]
+          }, undefined, true, undefined, this),
+          /* @__PURE__ */ jsx_dev_runtime8.jsxDEV("div", {
+            className: "mt-6 rounded-lg bg-slate-900 p-6 text-white",
+            children: [
+              /* @__PURE__ */ jsx_dev_runtime8.jsxDEV("h2", {
+                className: "mb-4 text-xl font-semibold",
+                children: "\uD83D\uDCBB Usage"
+              }, undefined, false, undefined, this),
+              /* @__PURE__ */ jsx_dev_runtime8.jsxDEV("pre", {
+                className: "overflow-x-auto text-sm",
+                children: /* @__PURE__ */ jsx_dev_runtime8.jsxDEV("code", {
+                  children: `import { BookingSearch } from '@balby/booking-search'
 import type { BookingSearchPayload, SearchLocation, AvailabilityDay } from '@balby/booking-search'
 
 ...
@@ -28797,13 +28836,14 @@ function App() {
     />
   )
 }`
+                }, undefined, false, undefined, this)
               }, undefined, false, undefined, this)
-            }, undefined, false, undefined, this)
-          ]
-        }, undefined, true, undefined, this)
-      ]
-    }, undefined, true, undefined, this)
-  }, undefined, false, undefined, this);
+            ]
+          }, undefined, true, undefined, this)
+        ]
+      }, undefined, true, undefined, this)
+    ]
+  }, undefined, true, undefined, this);
 }
 var root = import_client.createRoot(document.getElementById("root"));
 root.render(/* @__PURE__ */ jsx_dev_runtime8.jsxDEV(Demo, {}, undefined, false, undefined, this));

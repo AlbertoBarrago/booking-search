@@ -39,6 +39,15 @@ jobs:
       - name: Build demo page
         run: bun build index.html --outdir=dist-demo --publicPath=/booking-search/
 
+      - name: Fix asset paths for GitHub Pages
+        run: |
+          cd dist-demo
+          # Add .nojekyll to prevent Jekyll processing
+          touch .nojekyll
+          # Fix relative paths to absolute paths with base URL
+          sed -i 's|href="\./|href="/booking-search/|g' index.html
+          sed -i 's|src="\./|src="/booking-search/|g' index.html
+
       - name: Setup Pages
         uses: actions/configure-pages@v4
 
