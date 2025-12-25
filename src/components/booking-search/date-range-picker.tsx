@@ -86,6 +86,7 @@ export function DateRangePicker({
 		}
 	}
 
+<<<<<<< HEAD
 	const handleConfirm = () => {
 		onChange(localValue)
 		setOpen(false)
