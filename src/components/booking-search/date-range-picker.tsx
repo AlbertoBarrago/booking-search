@@ -197,7 +197,7 @@ export function DateRangePicker({
 			>
 				<div className={cn(
 					"p-2 sm:p-4",
-					isMobile && "max-h-[25vh] overflow-y-auto"
+					isMobile && "max-h-[60vh] overflow-y-auto"
 				)}>
 					<DayPicker
 						mode="range"
