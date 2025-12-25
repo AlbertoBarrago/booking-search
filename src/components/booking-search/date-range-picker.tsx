@@ -187,15 +187,18 @@ export function DateRangePicker({
                 </button>
             </PopoverTrigger>
             <PopoverContent
-                className="w-auto p-0 shadow-2xl max-w-[calc(100vw-2rem)] max-h-[calc(100vh-4rem)] overflow-y-auto"
+                className="w-auto p-0 shadow-2xl max-w-[calc(100vw-2rem)]"
                 align={isMobile ? "center" : "start"}
-                side={isMobile ? "bottom" : "bottom"}
+                side="bottom"
                 sideOffset={isMobile ? 4 : 8}
                 onInteractOutside={(e) => {
                     e.preventDefault()
                 }}
             >
-                <div className="p-2 sm:p-4">
+                <div className={cn(
+                    "p-2 sm:p-4",
+                    isMobile && "max-h-[45vh] overflow-y-auto"
+                )}>
                     <DayPicker
                         mode="range"
                         defaultMonth={localValue.from || new Date()}
@@ -214,37 +217,37 @@ export function DateRangePicker({
                             formatDay: renderDay,
                         }}
                     />
+                </div>
 
-                    <div className="border-t border-slate-200 p-2 sm:p-4 space-y-3">
-                        <div className="text-center">
-                            <p className="text-sm font-medium text-slate-700">
-                                {formatLocalDateRange()}
-                            </p>
-                        </div>
+                <div className="border-t border-slate-200 p-2 sm:p-4 space-y-3 bg-white">
+                    <div className="text-center">
+                        <p className="text-sm font-medium text-slate-700">
+                            {formatLocalDateRange()}
+                        </p>
+                    </div>
 
-                        <div className="flex gap-2">
-                            <button
-                                type="button"
-                                onClick={handleCancel}
-                                className="flex-1 rounded-lg border-2 border-slate-300 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 transition-colors hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2"
-                            >
-                                Cancel
-                            </button>
-                            <button
-                                type="button"
-                                onClick={handleConfirm}
-                                disabled={
-                                    !localValue.from ||
-                                    !localValue.to ||
-                                    (minNights && localValue.from && localValue.to
-                                        ? differenceInDays(localValue.to, localValue.from) < minNights
-                                        : false)
-                                }
-                                className="flex-1 rounded-lg bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:bg-slate-300 disabled:hover:bg-slate-300"
-                            >
-                                Confirm
-                            </button>
-                        </div>
+                    <div className="flex gap-2">
+                        <button
+                            type="button"
+                            onClick={handleCancel}
+                            className="flex-1 rounded-lg border-2 border-slate-300 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 transition-colors hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2"
+                        >
+                            Cancel
+                        </button>
+                        <button
+                            type="button"
+                            onClick={handleConfirm}
+                            disabled={
+                                !localValue.from ||
+                                !localValue.to ||
+                                (minNights && localValue.from && localValue.to
+                                    ? differenceInDays(localValue.to, localValue.from) < minNights
+                                    : false)
+                            }
+                            className="flex-1 rounded-lg bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:bg-slate-300 disabled:hover:bg-slate-300"
+                        >
+                            Confirm
+                        </button>
                     </div>
                 </div>
             </PopoverContent>
