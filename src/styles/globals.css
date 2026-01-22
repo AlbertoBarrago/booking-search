@@ -219,6 +219,11 @@
   cursor: not-allowed;
 }
 
+/* Safe area utilities for iPhone notch/home indicator */
+.pb-safe {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
 /* Mobile responsive styles */
 @media (max-width: 767px) {
   .rdp-custom {

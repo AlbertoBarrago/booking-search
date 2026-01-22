@@ -4,7 +4,7 @@ index.html
 demo.tsx
 test-setup.ts
 bunfig.toml
-CLAUDE.md
+AGENT.md
 
 # Tests
 src/components/booking-search/tests/

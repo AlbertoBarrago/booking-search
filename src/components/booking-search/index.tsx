@@ -181,11 +181,11 @@ export function BookingSearch({
             </div>
           </button>
         </DialogTrigger>
-        <DialogContent className="max-h-[90vh] overflow-y-auto sm:max-w-[600px]">
+        <DialogContent className="sm:max-w-[600px]">
           <DialogHeader>
             <DialogTitle>Search your accommodation</DialogTitle>
           </DialogHeader>
-          <div className="mt-4">
+          <div className="mt-2 pb-safe">
             <SearchContent />
           </div>
         </DialogContent>
