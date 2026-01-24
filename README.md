@@ -14,6 +14,7 @@ A framework-agnostic, high-performance, and accessible React component for booki
 * ✅ **TypeScript First**: Complete, type-safe interfaces
 * ✅ **Accessibility**: Full keyboard navigation and ARIA attributes (Radix UI)
 * ✅ **Responsive**: Horizontal layout on desktop, Dialog on mobile
+* ✅ **Internationalization (i18n)**: Full translation support with customizable strings
 * ✅ **Modular Components**:
   * `LocationCombobox`: Location search using the Command pattern (Shadcn)
   * `DateRangePicker`: Calendar with inline prices and availability
@@ -112,12 +113,13 @@ function App() {
 | `availability`        | `AvailabilityDay[]`                       | **Required**             | Availability and prices by date                  |
 | `onSearch`            | `(payload: BookingSearchPayload) => void` | **Required**             | Callback triggered when the user starts a search |
 | `defaultValues`       | `Partial<BookingSearchPayload>`           | `undefined`              | Initial values (optional)                        |
-| `searchButtonText`    | `string`                                  | `"Search"`               | Search button text                               |
-| `locationPlaceholder` | `string`                                  | `"Where are you going?"` | Placeholder for the location field               |
+| `translations`        | `BookingSearchTranslations`               | English defaults         | Custom translations for all UI strings           |
 | `minNights`           | `number`                                  | `1`                      | Minimum number of nights required                |
 | `maxAdults`           | `number`                                  | `30`                     | Maximum number of adults                         |
 | `maxChildren`         | `number`                                  | `10`                     | Maximum number of children                       |
 | `className`           | `string`                                  | `undefined`              | Custom CSS class                                 |
+
+> **Note:** `searchButtonText` and `locationPlaceholder` props are deprecated. Use `translations.search` and `translations.whereToGo` instead.
 
 ### TypeScript Interfaces
 
@@ -152,6 +154,100 @@ interface BookingSearchPayload {
   adults: number
   children: number
 }
+```
+
+## 🌍 Internationalization (i18n)
+
+The component supports full internationalization through the `translations` prop. All UI strings can be customized.
+
+### Basic Translation Example
+
+```tsx
+import { BookingSearch } from '@balby/booking-search'
+import type { BookingSearchTranslations } from '@balby/booking-search'
+
+const italianTranslations: BookingSearchTranslations = {
+  destination: "Destinazione",
+  whereToGo: "Dove vuoi andare?",
+  searchDestination: "Cerca una destinazione...",
+  noLocationFound: "Nessuna località trovata.",
+  checkInCheckOut: "Check-in - Check-out",
+  selectDateRange: "Seleziona date",
+  night: "notte",
+  nights: "notti",
+  selectCheckOut: "Seleziona check-out",
+  selectCheckOutMin: "Seleziona check-out (min. {minNights} notti)",
+  guests: "Ospiti",
+  adults: "Adulti",
+  adultsDescription: "Età 18+",
+  children: "Bambini",
+  childrenDescription: "Età 0-17",
+  adult: "adulto",
+  adultsPlural: "adulti",
+  child: "bambino",
+  childrenPlural: "bambini",
+  guest: "ospite",
+  guestsPlural: "ospiti",
+  confirm: "Conferma",
+  cancel: "Annulla",
+  search: "Cerca",
+  searchAccommodation: "Cerca il tuo alloggio",
+  openSearch: "Apri ricerca",
+}
+
+<BookingSearch
+  locations={locations}
+  availability={availability}
+  onSearch={handleSearch}
+  translations={italianTranslations}
+/>
+```
+
+### Available Translation Keys
+
+All translation keys are optional. If not provided, English defaults are used.
+
+| Key | Default | Description |
+| --- | ------- | ----------- |
+| `destination` | "Destination" | Label for the destination field |
+| `whereToGo` | "Where do you want to go?" | Placeholder when no location is selected |
+| `searchDestination` | "Search a destination..." | Placeholder for location search input |
+| `noLocationFound` | "No location found." | Message when no location matches |
+| `checkInCheckOut` | "Check-in - Check-out" | Label for date range field |
+| `selectDateRange` | "Select Date Range" | Placeholder when no dates selected |
+| `night` | "night" | Singular form |
+| `nights` | "nights" | Plural form |
+| `selectCheckOut` | "Select check-out" | Message when check-out needed |
+| `selectCheckOutMin` | "Select check-out (min. {minNights} nights)" | Min nights message (use `{minNights}` placeholder) |
+| `guests` | "Guests" | Label for guests field |
+| `adults` | "Adults" | Label for adults stepper |
+| `adultsDescription` | "Age 18+" | Description for adults |
+| `children` | "Children" | Label for children stepper |
+| `childrenDescription` | "Age 0-17" | Description for children |
+| `adult` | "adult" | Singular form for display |
+| `adultsPlural` | "adults" | Plural form for display |
+| `child` | "child" | Singular form for display |
+| `childrenPlural` | "children" | Plural form for display |
+| `guest` | "guest" | Singular for mobile summary |
+| `guestsPlural` | "guests" | Plural for mobile summary |
+| `confirm` | "Confirm" | Confirm button text |
+| `cancel` | "Cancel" | Cancel button text |
+| `search` | "Search" | Search button text |
+| `searchAccommodation` | "Search your accommodation" | Mobile dialog title |
+| `openSearch` | "Open booking search" | Aria label for mobile trigger |
+
+### Partial Translations
+
+You can provide only the strings you want to override:
+
+```tsx
+<BookingSearch
+  translations={{
+    search: "Find Hotels",
+    confirm: "Apply",
+  }}
+  // ... other props
+/>
 ```
 
 ## 🎨 Customization

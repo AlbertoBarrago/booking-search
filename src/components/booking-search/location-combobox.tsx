@@ -12,17 +12,35 @@ import {
 } from "./ui/command"
 import {Popover, PopoverContent, PopoverTrigger} from "./ui/popover"
 
+/** Default translations for LocationCombobox */
+const defaultLocationTranslations = {
+    destination: "Destination",
+    whereToGo: "Where do you want to go?",
+    searchDestination: "Search a destination...",
+    noLocationFound: "No location found.",
+}
+
 export function LocationCombobox({
                                      locations,
                                      value,
                                      onChange,
-                                     placeholder = "Where do you want to stay?",
+                                     placeholder,
                                      disabled = false,
                                      className,
                                      tabIndex,
-                                     title = "Destination"
+                                     title,
+                                     translations: userTranslations,
                                  }: LocationComboboxProps) {
     const [open, setOpen] = React.useState(false)
+
+    // Merge user translations with defaults (also support deprecated props for backwards compatibility)
+    const t = React.useMemo(() => ({
+        ...defaultLocationTranslations,
+        ...userTranslations,
+        // Support deprecated props
+        ...(title && { destination: title }),
+        ...(placeholder && { whereToGo: placeholder }),
+    }), [userTranslations, title, placeholder])
 
     return (
         <Popover open={open} onOpenChange={setOpen}>
@@ -41,20 +59,20 @@ export function LocationCombobox({
                 >
                     <MapPin className="h-5 w-5 text-slate-500 flex-shrink-0" aria-hidden="true"/>
                     <div className="flex flex-col min-w-0 flex-1">
-                        <span className="text-xs font-medium text-slate-500">{title}</span>
+                        <span className="text-xs font-medium text-slate-500">{t.destination}</span>
                         {value ? (
                             <span className="font-medium text-slate-900 truncate">{value.name}</span>
                         ) : (
-                            <span className="text-slate-400 truncate">{placeholder}</span>
+                            <span className="text-slate-400 truncate">{t.whereToGo}</span>
                         )}
                     </div>
                 </button>
             </PopoverTrigger>
             <PopoverContent className="w-[var(--radix-popover-trigger-width)] p-0" align="start">
                 <Command>
-                    <CommandInput placeholder="Search a destination..."/>
+                    <CommandInput placeholder={t.searchDestination}/>
                     <CommandList>
-                        <CommandEmpty>No location found.</CommandEmpty>
+                        <CommandEmpty>{t.noLocationFound}</CommandEmpty>
                         <CommandGroup>
                             {locations.map((location) => (
                                 <CommandItem

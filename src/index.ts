@@ -18,6 +18,7 @@ export type {
   GuestData,
   BookingSearchPayload,
   BookingSearchProps,
+  BookingSearchTranslations,
   LocationComboboxProps,
   DateRangePickerProps,
   GuestSelectorProps,

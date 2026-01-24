@@ -4,6 +4,20 @@ import { cn } from "../../lib/utils"
 import type { GuestSelectorProps, GuestStepperProps } from "../../types/booking"
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover"
 
+/** Default translations for GuestSelector */
+const defaultGuestTranslations = {
+  guests: "Guests",
+  adults: "Adults",
+  adultsDescription: "Age 18+",
+  children: "Children",
+  childrenDescription: "Age 0-17",
+  adult: "adult",
+  adultsPlural: "adults",
+  child: "child",
+  childrenPlural: "children",
+  confirm: "Confirm",
+}
+
 function GuestStepper({
   label,
   description,
@@ -66,10 +80,17 @@ export function GuestSelector({
                                   maxChildren = 10,
                                   disabled = false,
                                   className,
-                                  tabIndex
+                                  tabIndex,
+                                  translations: userTranslations,
                               }: GuestSelectorProps) {
   const [open, setOpen] = React.useState(false)
   const [localValue, setLocalValue] = React.useState(value)
+
+  // Merge user translations with defaults
+  const t = React.useMemo(() => ({
+    ...defaultGuestTranslations,
+    ...userTranslations,
+  }), [userTranslations])
 
   React.useEffect(() => {
     if (open) {
@@ -96,16 +117,16 @@ export function GuestSelector({
     const parts: string[] = []
 
     if (value.adults === 1) {
-      parts.push("1 adulto")
+      parts.push(`1 ${t.adult}`)
     } else {
-      parts.push(`${value.adults} adulti`)
+      parts.push(`${value.adults} ${t.adultsPlural}`)
     }
 
     if (value.children > 0) {
       if (value.children === 1) {
-        parts.push("1 bambino")
+        parts.push(`1 ${t.child}`)
       } else {
-        parts.push(`${value.children} bambini`)
+        parts.push(`${value.children} ${t.childrenPlural}`)
       }
     }
 
@@ -132,7 +153,7 @@ export function GuestSelector({
         >
           <Users className="h-5 w-5 text-slate-500 flex-shrink-0" aria-hidden="true" />
           <div className="flex flex-col min-w-0 flex-1">
-            <span className="text-xs font-medium text-slate-500">Guests</span>
+            <span className="text-xs font-medium text-slate-500">{t.guests}</span>
             <span className="font-medium text-slate-900 truncate">{formatGuestText()}</span>
           </div>
         </button>
@@ -146,8 +167,8 @@ export function GuestSelector({
       >
         <div className="space-y-1">
           <GuestStepper
-            label="Adulti"
-            description="Età 18+"
+            label={t.adults}
+            description={t.adultsDescription}
             value={localValue.adults}
             onIncrement={() => handleAdultsChange(1)}
             onDecrement={() => handleAdultsChange(-1)}
@@ -156,8 +177,8 @@ export function GuestSelector({
           />
           <div className="border-t border-slate-200" />
           <GuestStepper
-            label="Bambini"
-            description="Età 0-17"
+            label={t.children}
+            description={t.childrenDescription}
             value={localValue.children}
             onIncrement={() => handleChildrenChange(1)}
             onDecrement={() => handleChildrenChange(-1)}
@@ -171,7 +192,7 @@ export function GuestSelector({
               onClick={handleConfirm}
               className="w-full rounded-lg bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
             >
-              Conferma
+              {t.confirm}
             </button>
           </div>
         </div>

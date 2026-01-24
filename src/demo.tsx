@@ -8,43 +8,43 @@ const sampleLocations: SearchLocation[] = [
   {
     id: "1",
     name: "Roma, Italia",
-    type: "Città",
+    type: "City",
     countryCode: "IT",
   },
   {
     id: "2",
     name: "Firenze, Italia",
-    type: "Città",
+    type: "City",
     countryCode: "IT",
   },
   {
     id: "3",
     name: "Venezia, Italia",
-    type: "Città",
+    type: "City",
     countryCode: "IT",
   },
   {
     id: "4",
     name: "Milano, Italia",
-    type: "Città",
+    type: "City",
     countryCode: "IT",
   },
   {
     id: "5",
     name: "Napoli, Italia",
-    type: "Città",
+    type: "City",
     countryCode: "IT",
   },
   {
     id: "6",
     name: "Torino, Italia",
-    type: "Città",
+    type: "City",
     countryCode: "IT",
   },
   {
     id: "7",
     name: "Cagliari, Italia",
-    type: "Città",
+    type: "City",
     countryCode: "IT",
   },
 ]
@@ -97,8 +97,8 @@ function Demo() {
       alert(
         `Search completed!\n\n` +
         `📍 Destination: ${payload.location?.name || 'Not selected'}\n` +
-        `📅 Check-in: ${payload.checkIn.toLocaleDateString('it-IT')}\n` +
-        `📅 Check-out: ${payload.checkOut.toLocaleDateString('it-IT')}\n` +
+        `📅 Check-in: ${payload.checkIn.toLocaleDateString('en-US')}\n` +
+        `📅 Check-out: ${payload.checkOut.toLocaleDateString('en-US')}\n` +
         `👥 Guests: ${payload.adults} adults, ${payload.children} children\n` +
         `🌙 Nights: ${relevantDays.length}\n` +
         `💰 Estimated price: €${totalPrice}`
@@ -188,6 +188,10 @@ function Demo() {
             <li className="flex items-start gap-2">
               <span className="text-green-500">✓</span>
               <span><strong>Agnostic:</strong> Input data via props, results via callback</span>
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="text-green-500">✓</span>
+              <span><strong>i18n Ready:</strong> Full translation support via translations prop</span>
             </li>
           </ul>
         </div>

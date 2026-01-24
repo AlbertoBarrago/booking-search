@@ -1,7 +1,7 @@
 import * as React from "react"
 import { Search } from "lucide-react"
 import { cn } from "../../lib/utils"
-import type { BookingSearchProps, SearchLocation, GuestData } from "../../types/booking"
+import type { BookingSearchProps, SearchLocation, GuestData, BookingSearchTranslations } from "../../types/booking"
 import { LocationCombobox } from "./location-combobox"
 import { DateRangePicker } from "./date-range-picker"
 import { GuestSelector } from "./guest-selector"
@@ -14,6 +14,41 @@ import {
 } from "./ui/dialog"
 import type {JSX} from "react"
 
+/** Default translations (English) */
+const defaultTranslations: Required<BookingSearchTranslations> = {
+  // Location strings
+  destination: "Destination",
+  whereToGo: "Where do you want to go?",
+  searchDestination: "Search a destination...",
+  noLocationFound: "No location found.",
+  // Date picker strings
+  checkInCheckOut: "Check-in - Check-out",
+  selectDateRange: "Select Date Range",
+  night: "night",
+  nights: "nights",
+  selectCheckOut: "Select check-out",
+  selectCheckOutMin: "Select check-out (min. {minNights} nights)",
+  // Guest selector strings
+  guests: "Guests",
+  adults: "Adults",
+  adultsDescription: "Age 18+",
+  children: "Children",
+  childrenDescription: "Age 0-17",
+  adult: "adult",
+  adultsPlural: "adults",
+  child: "child",
+  childrenPlural: "children",
+  guest: "guest",
+  guestsPlural: "guests",
+  // Button strings
+  confirm: "Confirm",
+  cancel: "Cancel",
+  search: "Search",
+  // Dialog strings
+  searchAccommodation: "Search your accommodation",
+  openSearch: "Open booking search",
+}
+
 /**
  * A component that provides a booking search interface. Users can select a destination, date range, and number of guests.
  * It supports both desktop and mobile layouts.
@@ -23,12 +58,13 @@ import type {JSX} from "react"
  * @param {Array} props.locations - The list of available locations for selection.
  * @param {Function} props.onSearch - Callback function triggered when the search is submitted. Receives selected search criteria as an argument.
  * @param {Object} [props.defaultValues] - Default values for location, check-in and check-out dates, and guest count.
- * @param {string} [props.searchButtonText='Cerca'] - Text for the search button.
- * @param {string} [props.locationPlaceholder='Dove vuoi andare?'] - Placeholder text for the location input field.
+ * @param {string} [props.searchButtonText='Search'] - Text for the search button. @deprecated Use translations.search instead.
+ * @param {string} [props.locationPlaceholder='Where do you want to go?'] - Placeholder text for the location input field. @deprecated Use translations.whereToGo instead.
  * @param {number} [props.minNights=1] - Minimum number of nights for the date range picker.
  * @param {number} [props.maxAdults=30] - Maximum number of adult guests allowed.
  * @param {number} [props.maxChildren=10] - Maximum number of child guests allowed.
  * @param {string} [props.className] - Additional CSS class for customizing the component style.
+ * @param {BookingSearchTranslations} [props.translations] - Custom translations for all UI strings.
  *
  * @return {JSX.Element} A booking search component containing inputs for location, date range, and guest selection, along with a search button.
  */
@@ -37,13 +73,22 @@ export function BookingSearch({
   locations,
   onSearch,
   defaultValues,
-  searchButtonText = "Search",
-  locationPlaceholder = "Where do you want to go?",
+  searchButtonText,
+  locationPlaceholder,
   minNights = 1,
   maxAdults = 30,
   maxChildren = 10,
   className,
+  translations: userTranslations,
 }: BookingSearchProps): JSX.Element {
+  // Merge user translations with defaults
+  const t = React.useMemo(() => ({
+    ...defaultTranslations,
+    ...userTranslations,
+    // Support deprecated props for backwards compatibility
+    ...(searchButtonText && { search: searchButtonText }),
+    ...(locationPlaceholder && { whereToGo: locationPlaceholder }),
+  }), [userTranslations, searchButtonText, locationPlaceholder])
   const [location, setLocation] = React.useState<SearchLocation | null>(
     defaultValues?.location ?? null
   )
@@ -91,13 +136,17 @@ export function BookingSearch({
       <div className="flex flex-col gap-3 md:flex-row md:gap-2 md:items-center">
         <div className="flex-1 relative focus-within:z-10">
           <LocationCombobox
-              title="Destination"
               locations={locations}
               value={location}
               onChange={setLocation}
-              placeholder={locationPlaceholder}
               className="w-full border-0 md:rounded-l-lg md:rounded-r-none"
               tabIndex={1}
+              translations={{
+                destination: t.destination,
+                whereToGo: t.whereToGo,
+                searchDestination: t.searchDestination,
+                noLocationFound: t.noLocationFound,
+              }}
           />
         </div>
 
@@ -109,6 +158,16 @@ export function BookingSearch({
               minNights={minNights}
               className="w-full border-0 md:rounded-none"
               tabIndex={2}
+              translations={{
+                checkInCheckOut: t.checkInCheckOut,
+                selectDateRange: t.selectDateRange,
+                night: t.night,
+                nights: t.nights,
+                selectCheckOut: t.selectCheckOut,
+                selectCheckOutMin: t.selectCheckOutMin,
+                confirm: t.confirm,
+                cancel: t.cancel,
+              }}
           />
         </div>
 
@@ -120,6 +179,18 @@ export function BookingSearch({
               maxChildren={maxChildren}
               className="w-full border-0 md:rounded-none"
               tabIndex={3}
+              translations={{
+                guests: t.guests,
+                adults: t.adults,
+                adultsDescription: t.adultsDescription,
+                children: t.children,
+                childrenDescription: t.childrenDescription,
+                adult: t.adult,
+                adultsPlural: t.adultsPlural,
+                child: t.child,
+                childrenPlural: t.childrenPlural,
+                confirm: t.confirm,
+              }}
           />
         </div>
 
@@ -128,14 +199,14 @@ export function BookingSearch({
               type="button"
               onClick={handleSearch}
               disabled={!isSearchEnabled}
-              aria-label={searchButtonText}
+              aria-label={t.search}
               tabIndex={4}
               className={cn(
                   "flex h-12 w-full items-center justify-center gap-2 rounded-lg bg-blue-600 px-6 text-sm font-bold text-white transition-all hover:bg-blue-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 focus-visible:shadow-lg disabled:bg-slate-300 md:w-auto",
               )}
           >
             <Search className="h-4 w-4" />
-            <span className="whitespace-nowrap">{searchButtonText}</span>
+            <span className="whitespace-nowrap">{t.search}</span>
           </button>
         </div>
       </div>
@@ -167,23 +238,23 @@ export function BookingSearch({
               "flex h-14 w-full items-center gap-3 rounded-lg border border-slate-300 bg-white px-4 shadow-md",
               className
             )}
-            aria-label="Open booking search"
+            aria-label={t.openSearch}
           >
             <Search className="h-5 w-5 text-slate-500" aria-hidden="true" />
             <div className="flex flex-col items-start text-left">
               <span className="text-sm font-semibold text-slate-900">
-                Dove vuoi andare?
+                {t.whereToGo}
               </span>
               <span className="text-xs text-slate-500">
-                {location?.name ?? "Destination"} • {guests.adults + guests.children}{" "}
-                {guests.adults + guests.children === 1 ? "ospite" : "ospiti"}
+                {location?.name ?? t.destination} • {guests.adults + guests.children}{" "}
+                {guests.adults + guests.children === 1 ? t.guest : t.guestsPlural}
               </span>
             </div>
           </button>
         </DialogTrigger>
         <DialogContent className="sm:max-w-[600px]">
           <DialogHeader>
-            <DialogTitle>Search your accommodation</DialogTitle>
+            <DialogTitle>{t.searchAccommodation}</DialogTitle>
           </DialogHeader>
           <div className="mt-2 pb-safe">
             <SearchContent />

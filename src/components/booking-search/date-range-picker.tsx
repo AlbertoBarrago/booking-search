@@ -7,6 +7,18 @@ import { cn } from "../../lib/utils"
 import type { DateRangePickerProps, AvailabilityDay } from "../../types/booking"
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover"
 
+/** Default translations for DateRangePicker */
+const defaultDateTranslations = {
+	checkInCheckOut: "Check-in - Check-out",
+	selectDateRange: "Select Date Range",
+	night: "night",
+	nights: "nights",
+	selectCheckOut: "Select check-out",
+	selectCheckOutMin: "Select check-out (min. {minNights} nights)",
+	confirm: "Confirm",
+	cancel: "Cancel",
+}
+
 export function DateRangePicker({
 	availability,
 	value,
@@ -14,11 +26,18 @@ export function DateRangePicker({
 	disabled = false,
 	className,
 	minNights,
-	tabIndex
+	tabIndex,
+	translations: userTranslations,
 }: DateRangePickerProps) {
 	const [open, setOpen] = React.useState(false)
 	const [localValue, setLocalValue] = React.useState(value)
 	const [isMobile, setIsMobile] = React.useState(false)
+
+	// Merge user translations with defaults
+	const t = React.useMemo(() => ({
+		...defaultDateTranslations,
+		...userTranslations,
+	}), [userTranslations])
 
 	React.useEffect(() => {
 		const checkMobile = () => {
@@ -119,21 +138,21 @@ export function DateRangePicker({
 		if (value.from) {
 			return format(value.from, "dd MMM yyyy", { locale: enUS })
 		}
-		return "Select Date Range"
+		return t.selectDateRange
 	}
 
 	const formatLocalDateRange = () => {
 		if (localValue.from && localValue.to) {
 			const nights = differenceInDays(localValue.to, localValue.from)
-			return `${nights} ${nights === 1 ? 'night' : 'nights'}`
+			return `${nights} ${nights === 1 ? t.night : t.nights}`
 		}
 		if (localValue.from) {
 			if (minNights && minNights > 1) {
-				return `Select check-out (min. ${minNights} nights)`
+				return t.selectCheckOutMin.replace('{minNights}', String(minNights))
 			}
-			return "Select check-out"
+			return t.selectCheckOut
 		}
-		return "Select Date Range"
+		return t.selectDateRange
 	}
 
 	const modifiers: Record<string, Date | Date[]> = {
@@ -159,7 +178,7 @@ export function DateRangePicker({
 			<PopoverTrigger asChild>
 				<button
 					type="button"
-					aria-label="Select Date Range"
+					aria-label={t.selectDateRange}
 					disabled={disabled}
 					tabIndex={tabIndex}
 					className={cn(
@@ -173,7 +192,7 @@ export function DateRangePicker({
 					<Calendar className="h-5 w-5 text-slate-500 flex-shrink-0" aria-hidden="true" />
 					<div className="flex flex-col min-w-0 flex-1">
 						<span className="text-xs font-medium text-slate-500">
-							Check-in - Check-out
+							{t.checkInCheckOut}
 						</span>
 						<span
 							className={cn(
@@ -232,7 +251,7 @@ export function DateRangePicker({
 							onClick={handleCancel}
 							className="flex-1 rounded-lg border-2 border-slate-300 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 transition-colors hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2"
 						>
-							Cancel
+							{t.cancel}
 						</button>
 						<button
 							type="button"
@@ -246,7 +265,7 @@ export function DateRangePicker({
 							}
 							className="flex-1 rounded-lg bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:bg-slate-300 disabled:hover:bg-slate-300"
 						>
-							Confirm
+							{t.confirm}
 						</button>
 					</div>
 				</div>
