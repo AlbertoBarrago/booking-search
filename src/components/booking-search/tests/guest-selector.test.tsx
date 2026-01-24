@@ -2,7 +2,20 @@ import { test, expect, describe, beforeEach } from "bun:test"
 import React from "react"
 import { render, screen, fireEvent, waitFor } from "@testing-library/react"
 import { GuestSelector } from "../guest-selector"
-import type { GuestData } from "../../../types/booking"
+import type { GuestData, BookingSearchTranslations } from "../../../types/booking"
+
+const italianTranslations: Pick<BookingSearchTranslations, 'guests' | 'adults' | 'adultsDescription' | 'children' | 'childrenDescription' | 'adult' | 'adultsPlural' | 'child' | 'childrenPlural' | 'confirm'> = {
+  guests: "Ospiti",
+  adults: "Adulti",
+  adultsDescription: "Età 18+",
+  children: "Bambini",
+  childrenDescription: "Età 0-17",
+  adult: "adulto",
+  adultsPlural: "adulti",
+  child: "bambino",
+  childrenPlural: "bambini",
+  confirm: "Conferma",
+}
 
 describe("GuestSelector", () => {
   const mockValue: GuestData = {
@@ -17,9 +30,9 @@ describe("GuestSelector", () => {
   })
 
   test("renders with default guest count", () => {
-    render(<GuestSelector value={mockValue} onChange={mockOnChange} />)
+    render(<GuestSelector value={mockValue} onChange={mockOnChange} translations={italianTranslations} />)
 
-    expect(screen.getByText("Guests")).toBeDefined()
+    expect(screen.getByText("Ospiti")).toBeDefined()
     expect(screen.getByText("2 adulti")).toBeDefined()
   })
 
@@ -28,6 +41,7 @@ describe("GuestSelector", () => {
       <GuestSelector
         value={{ adults: 1, children: 0 }}
         onChange={mockOnChange}
+        translations={italianTranslations}
       />
     )
 
@@ -39,6 +53,7 @@ describe("GuestSelector", () => {
       <GuestSelector
         value={{ adults: 2, children: 1 }}
         onChange={mockOnChange}
+        translations={italianTranslations}
       />
     )
 
@@ -50,6 +65,7 @@ describe("GuestSelector", () => {
       <GuestSelector
         value={{ adults: 2, children: 3 }}
         onChange={mockOnChange}
+        translations={italianTranslations}
       />
     )
 
@@ -57,7 +73,7 @@ describe("GuestSelector", () => {
   })
 
   test("opens popover when button is clicked", async () => {
-    render(<GuestSelector value={mockValue} onChange={mockOnChange} />)
+    render(<GuestSelector value={mockValue} onChange={mockOnChange} translations={italianTranslations} />)
 
     const button = screen.getByRole("button", { name: "Select guests" })
     fireEvent.click(button)
@@ -69,7 +85,7 @@ describe("GuestSelector", () => {
   })
 
   test("displays guest steppers in popover", async () => {
-    render(<GuestSelector value={mockValue} onChange={mockOnChange} />)
+    render(<GuestSelector value={mockValue} onChange={mockOnChange} translations={italianTranslations} />)
 
     const button = screen.getByRole("button", { name: "Select guests" })
     fireEvent.click(button)
@@ -88,7 +104,7 @@ describe("GuestSelector", () => {
       currentValue = guests
     }
 
-    render(<GuestSelector value={currentValue} onChange={handleChange} />)
+    render(<GuestSelector value={currentValue} onChange={handleChange} translations={italianTranslations} />)
 
     const button = screen.getByRole("button", { name: "Select guests" })
     fireEvent.click(button)
@@ -112,7 +128,7 @@ describe("GuestSelector", () => {
       currentValue = guests
     }
 
-    render(<GuestSelector value={currentValue} onChange={handleChange} />)
+    render(<GuestSelector value={currentValue} onChange={handleChange} translations={italianTranslations} />)
 
     const button = screen.getByRole("button", { name: "Select guests" })
     fireEvent.click(button)
@@ -136,7 +152,7 @@ describe("GuestSelector", () => {
       currentValue = guests
     }
 
-    render(<GuestSelector value={currentValue} onChange={handleChange} />)
+    render(<GuestSelector value={currentValue} onChange={handleChange} translations={italianTranslations} />)
 
     const button = screen.getByRole("button", { name: "Select guests" })
     fireEvent.click(button)
@@ -160,7 +176,7 @@ describe("GuestSelector", () => {
       currentValue = guests
     }
 
-    render(<GuestSelector value={currentValue} onChange={handleChange} />)
+    render(<GuestSelector value={currentValue} onChange={handleChange} translations={italianTranslations} />)
 
     const button = screen.getByRole("button", { name: "Select guests" })
     fireEvent.click(button)
@@ -183,6 +199,7 @@ describe("GuestSelector", () => {
       <GuestSelector
         value={{ adults: 1, children: 0 }}
         onChange={mockOnChange}
+        translations={italianTranslations}
       />
     )
 
@@ -200,6 +217,7 @@ describe("GuestSelector", () => {
       <GuestSelector
         value={{ adults: 2, children: 0 }}
         onChange={mockOnChange}
+        translations={italianTranslations}
       />
     )
 
@@ -218,6 +236,7 @@ describe("GuestSelector", () => {
         value={{ adults: 5, children: 0 }}
         onChange={mockOnChange}
         maxAdults={5}
+        translations={italianTranslations}
       />
     )
 
@@ -236,6 +255,7 @@ describe("GuestSelector", () => {
         value={{ adults: 2, children: 3 }}
         onChange={mockOnChange}
         maxChildren={3}
+        translations={italianTranslations}
       />
     )
 
@@ -258,6 +278,7 @@ describe("GuestSelector", () => {
       <GuestSelector
         value={{ adults: 2, children: 0 }}
         onChange={handleChange}
+        translations={italianTranslations}
       />
     )
 
@@ -287,6 +308,7 @@ describe("GuestSelector", () => {
       <GuestSelector
         value={{ adults: 2, children: 0 }}
         onChange={mockOnChange}
+        translations={italianTranslations}
       />
     )
 
@@ -339,7 +361,7 @@ describe("GuestSelector", () => {
   })
 
   test("closes popover after confirming selection", async () => {
-    render(<GuestSelector value={mockValue} onChange={mockOnChange} />)
+    render(<GuestSelector value={mockValue} onChange={mockOnChange} translations={italianTranslations} />)
 
     const button = screen.getByRole("button", { name: "Select guests" })
     fireEvent.click(button)

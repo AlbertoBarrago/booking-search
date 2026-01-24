@@ -2,8 +2,37 @@ import { test, expect, describe, beforeEach } from "bun:test"
 import React from "react"
 import { render, screen, fireEvent, waitFor } from "@testing-library/react"
 import { BookingSearch } from "../index"
-import type { SearchLocation, AvailabilityDay, BookingSearchPayload } from "../../../types/booking"
+import type { SearchLocation, AvailabilityDay, BookingSearchPayload, BookingSearchTranslations } from "../../../types/booking"
 import { format, addDays } from "date-fns"
+
+const italianTranslations: BookingSearchTranslations = {
+  destination: "Destinazione",
+  whereToGo: "Dove vuoi andare?",
+  searchDestination: "Cerca una destinazione...",
+  noLocationFound: "Nessuna località trovata.",
+  checkInCheckOut: "Check-in - Check-out",
+  selectDateRange: "Seleziona date",
+  night: "notte",
+  nights: "notti",
+  selectCheckOut: "Seleziona check-out",
+  selectCheckOutMin: "Seleziona check-out (min. {minNights} notti)",
+  guests: "Ospiti",
+  adults: "Adulti",
+  adultsDescription: "Età 18+",
+  children: "Bambini",
+  childrenDescription: "Età 0-17",
+  adult: "adulto",
+  adultsPlural: "adulti",
+  child: "bambino",
+  childrenPlural: "bambini",
+  guest: "ospite",
+  guestsPlural: "ospiti",
+  confirm: "Conferma",
+  cancel: "Annulla",
+  search: "Cerca",
+  searchAccommodation: "Cerca il tuo alloggio",
+  openSearch: "Apri ricerca",
+}
 
 describe("BookingSearch", () => {
   const today = new Date()
@@ -106,6 +135,7 @@ describe("BookingSearch", () => {
           adults: 3,
           children: 2,
         }}
+        translations={italianTranslations}
       />
     )
 
@@ -261,6 +291,7 @@ describe("BookingSearch", () => {
         availability={mockAvailability}
         locations={mockLocations}
         onSearch={mockOnSearch}
+        translations={italianTranslations}
       />
     )
 
